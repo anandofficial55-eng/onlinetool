@@ -1,0 +1,12 @@
+# robots.txt for https://easywebtools.in/
+
+User-agent: *
+Disallow: /wp-admin/
+Disallow: /wp-login.php
+Disallow: /cgi-bin/
+Disallow: /cart/
+Disallow: /checkout/
+
+Allow: /wp-admin/admin-ajax.php
+
+Sitemap: https://easywebtools.in/sitemap.xml
