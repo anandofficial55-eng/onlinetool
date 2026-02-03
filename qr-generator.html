@@ -1,0 +1,1278 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QR Code Generator - Free Online Tool</title>
+    <meta name="description" content="Free QR Code Generator with custom colors, logos & styles. Real-time preview!">
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        :root {
+            --primary: #8b5cf6;
+            --primary-dark: #7c3aed;
+            --success: #10b981;
+            --danger: #ef4444;
+            --gray-900: #111827;
+            --gray-700: #374151;
+            --gray-600: #4b5563;
+            --gray-500: #6b7280;
+            --gray-400: #9ca3af;
+            --gray-300: #d1d5db;
+            --gray-200: #e5e7eb;
+            --gray-100: #f3f4f6;
+            --gray-50: #f9fafb;
+            --white: #ffffff;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: linear-gradient(180deg, #f8fafc 0%, #f1f5f9 100%);
+            min-height: 100vh;
+            color: var(--gray-900);
+        }
+
+        .bg-pattern {
+            position: fixed;
+            inset: 0;
+            background-image: 
+                linear-gradient(rgba(139, 92, 246, 0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(139, 92, 246, 0.03) 1px, transparent 1px);
+            background-size: 40px 40px;
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        .container { max-width: 1280px; margin: 0 auto; padding: 0 20px; }
+
+        /* Header */
+        .header { text-align: center; padding: 40px 20px 32px; }
+
+        .header-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: var(--white);
+            border: 1px solid var(--gray-200);
+            padding: 8px 18px;
+            border-radius: 100px;
+            font-size: 14px;
+            font-weight: 500;
+            color: var(--gray-600);
+            margin-bottom: 20px;
+        }
+
+        .header-badge-dot {
+            width: 8px;
+            height: 8px;
+            background: var(--success);
+            border-radius: 50%;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+
+        .header h1 { font-size: 42px; font-weight: 800; margin-bottom: 10px; }
+        .header h1 span {
+            background: linear-gradient(135deg, var(--primary), #ec4899);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            font-style: italic;
+        }
+        .header p { color: var(--gray-500); font-size: 16px; }
+
+        /* Tabs */
+        .qr-tabs {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-bottom: 32px;
+            padding: 0 20px;
+        }
+
+        .qr-tab {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 18px;
+            background: var(--white);
+            border: 1px solid var(--gray-200);
+            border-radius: 12px;
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--gray-600);
+            cursor: pointer;
+            transition: all 0.2s;
+            font-family: inherit;
+        }
+
+        .qr-tab:hover { border-color: var(--gray-300); }
+        .qr-tab.active {
+            background: var(--primary);
+            border-color: var(--primary);
+            color: var(--white);
+            box-shadow: 0 4px 12px rgba(139, 92, 246, 0.3);
+        }
+        .qr-tab svg { width: 18px; height: 18px; }
+
+        /* Main Grid */
+        .main-grid {
+            display: grid;
+            grid-template-columns: 1fr 360px 300px;
+            gap: 24px;
+            padding-bottom: 60px;
+        }
+
+        .card {
+            background: var(--white);
+            border-radius: 20px;
+            border: 1px solid var(--gray-200);
+            box-shadow: 0 4px 20px rgba(0,0,0,0.04);
+            overflow: hidden;
+        }
+
+        /* Form Card */
+        .form-header {
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            padding: 18px 24px;
+            color: var(--white);
+            display: flex;
+            align-items: center;
+            gap: 14px;
+        }
+
+        .form-icon {
+            width: 40px;
+            height: 40px;
+            background: rgba(255,255,255,0.2);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .form-icon svg { width: 20px; height: 20px; }
+
+        .form-title h2 { font-size: 18px; font-weight: 700; margin-bottom: 2px; }
+        .form-title p { font-size: 13px; opacity: 0.85; }
+
+        .form-body { padding: 24px; }
+
+        .form-group { margin-bottom: 20px; }
+        .form-label {
+            display: block;
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--gray-700);
+            margin-bottom: 8px;
+        }
+        .form-label span { font-weight: 400; color: var(--gray-400); }
+
+        .form-input, .form-textarea {
+            width: 100%;
+            padding: 12px 16px;
+            font-size: 15px;
+            font-family: inherit;
+            border: 2px solid var(--gray-200);
+            border-radius: 12px;
+            background: var(--white);
+            color: var(--gray-900);
+            transition: all 0.2s;
+        }
+
+        .form-input:focus, .form-textarea:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 4px rgba(139, 92, 246, 0.1);
+        }
+
+        .form-textarea { resize: none; min-height: 100px; }
+
+        .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+
+        .radio-group { display: flex; gap: 8px; }
+        .radio-btn {
+            flex: 1;
+            padding: 10px;
+            background: var(--gray-50);
+            border: 2px solid var(--gray-200);
+            border-radius: 10px;
+            text-align: center;
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--gray-600);
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .radio-btn:hover { border-color: var(--gray-300); }
+        .radio-btn.active {
+            background: var(--primary);
+            border-color: var(--primary);
+            color: var(--white);
+        }
+
+        .form-section { display: none; }
+        .form-section.active { display: block; }
+
+        .btn-group { display: flex; gap: 12px; margin-top: 24px; }
+
+        .btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            padding: 14px 24px;
+            font-size: 15px;
+            font-weight: 600;
+            font-family: inherit;
+            border: none;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .btn svg { width: 20px; height: 20px; }
+
+        .btn-primary {
+            flex: 1;
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            color: var(--white);
+            box-shadow: 0 4px 14px rgba(139, 92, 246, 0.4);
+        }
+        .btn-primary:hover { transform: translateY(-2px); }
+
+        .btn-reset {
+            width: 48px;
+            background: var(--gray-100);
+            color: var(--gray-500);
+        }
+        .btn-reset:hover { background: var(--gray-200); }
+
+        .btn-download {
+            width: 100%;
+            background: linear-gradient(135deg, var(--success), #059669);
+            color: var(--white);
+            box-shadow: 0 4px 14px rgba(16, 185, 129, 0.35);
+        }
+
+        /* Preview Card */
+        .preview-body { padding: 24px; text-align: center; }
+        .preview-title { font-size: 16px; font-weight: 700; color: var(--gray-700); margin-bottom: 24px; }
+
+        .qr-box {
+            background: var(--gray-50);
+            border: 2px dashed var(--gray-300);
+            border-radius: 16px;
+            padding: 32px;
+            margin-bottom: 20px;
+            min-height: 280px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .qr-box.has-qr {
+            background: var(--white);
+            border: 2px solid var(--primary);
+        }
+
+        .qr-placeholder { text-align: center; color: var(--gray-400); }
+        .qr-placeholder svg { width: 56px; height: 56px; margin-bottom: 16px; opacity: 0.4; }
+        .qr-placeholder p { font-size: 15px; font-weight: 600; color: var(--gray-500); }
+        .qr-placeholder span { font-size: 13px; color: var(--gray-400); }
+
+        #qrCanvas { border-radius: 8px; max-width: 100%; height: auto; }
+
+        /* Customize Card */
+        .customize-header {
+            padding: 18px 20px;
+            border-bottom: 1px solid var(--gray-100);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 16px;
+            font-weight: 700;
+        }
+        .customize-header svg { width: 20px; height: 20px; color: var(--primary); }
+
+        .customize-body { padding: 20px; }
+        .customize-section { margin-bottom: 24px; }
+        .customize-section:last-child { margin-bottom: 0; }
+        .customize-label { font-size: 13px; font-weight: 600; color: var(--gray-600); margin-bottom: 10px; display: block; }
+
+        /* Logo Upload */
+        .logo-upload {
+            border: 2px dashed var(--gray-300);
+            border-radius: 12px;
+            padding: 16px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.2s;
+            position: relative;
+            overflow: hidden;
+        }
+        .logo-upload:hover { border-color: var(--primary); background: rgba(139, 92, 246, 0.03); }
+        .logo-upload.has-logo { border: 2px solid var(--success); background: rgba(16, 185, 129, 0.05); }
+
+        .logo-upload input {
+            position: absolute;
+            inset: 0;
+            opacity: 0;
+            cursor: pointer;
+        }
+
+        .logo-upload-text { display: flex; align-items: center; justify-content: center; gap: 8px; color: var(--gray-500); font-size: 14px; }
+        .logo-upload-text svg { width: 20px; height: 20px; }
+
+        .logo-preview { display: none; align-items: center; gap: 10px; }
+        .logo-preview img { width: 36px; height: 36px; object-fit: contain; border-radius: 6px; }
+        .logo-preview span { flex: 1; font-size: 12px; color: var(--gray-600); text-align: left; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+        .logo-remove {
+            width: 28px;
+            height: 28px;
+            background: #fee2e2;
+            border: none;
+            border-radius: 6px;
+            color: var(--danger);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            z-index: 10;
+        }
+        .logo-remove svg { width: 16px; height: 16px; }
+
+        /* Style Toggle */
+        .style-toggle {
+            display: flex;
+            background: var(--gray-100);
+            border-radius: 10px;
+            padding: 4px;
+        }
+        .style-btn {
+            flex: 1;
+            padding: 10px;
+            border: none;
+            background: transparent;
+            border-radius: 8px;
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--gray-500);
+            cursor: pointer;
+            transition: all 0.2s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+            font-family: inherit;
+        }
+        .style-btn.active { background: var(--white); color: var(--gray-900); box-shadow: 0 2px 8px rgba(0,0,0,0.08); }
+        .style-btn svg { width: 16px; height: 16px; }
+
+        /* Color Section */
+        .color-section {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .color-grid { display: flex; flex-wrap: wrap; gap: 8px; flex: 1; }
+        
+        .color-dot {
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            border: 3px solid transparent;
+            cursor: pointer;
+            transition: all 0.15s;
+        }
+        .color-dot:hover { transform: scale(1.15); }
+        .color-dot.active { border-color: var(--gray-400); box-shadow: 0 0 0 2px var(--white), 0 0 0 4px var(--gray-900); }
+        .color-dot.white-dot { border: 2px solid var(--gray-300); }
+
+        /* Color Picker */
+        .color-picker-wrap {
+            position: relative;
+        }
+
+        .color-picker-btn {
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            border: 2px solid var(--gray-300);
+            cursor: pointer;
+            background: conic-gradient(red, yellow, lime, aqua, blue, magenta, red);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.15s;
+        }
+
+        .color-picker-btn:hover { transform: scale(1.15); }
+
+        .color-picker-btn svg {
+            width: 14px;
+            height: 14px;
+            color: white;
+            filter: drop-shadow(0 1px 2px rgba(0,0,0,0.5));
+        }
+
+        .color-picker-input {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            opacity: 0;
+            cursor: pointer;
+        }
+
+        /* Size Slider */
+        .size-wrap { display: flex; align-items: center; gap: 12px; }
+        .size-slider {
+            flex: 1;
+            -webkit-appearance: none;
+            height: 6px;
+            background: var(--gray-200);
+            border-radius: 3px;
+        }
+        .size-slider::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            width: 18px;
+            height: 18px;
+            background: var(--primary);
+            border-radius: 50%;
+            cursor: pointer;
+        }
+        .size-value { font-size: 14px; font-weight: 600; color: var(--gray-600); min-width: 45px; text-align: right; }
+
+        /* Footer */
+        .footer { text-align: center; padding: 30px 20px 40px; color: var(--gray-500); }
+        .footer-features { display: flex; justify-content: center; gap: 24px; margin-bottom: 16px; flex-wrap: wrap; font-size: 14px; }
+        .footer-features span{display:flex;align-items:center;gap:0 4px;}
+        /* Responsive */
+        @media (max-width: 1100px) {
+            .main-grid { grid-template-columns: 1fr 1fr; }
+            .customize-card { grid-column: span 2; }
+            .customize-body { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+            .customize-section { margin-bottom: 0; }
+        }
+
+        @media (max-width: 768px) {
+            .main-grid { grid-template-columns: 1fr; }
+            .customize-card { grid-column: span 1; }
+            .customize-body { grid-template-columns: 1fr 1fr; }
+            .header h1 { font-size: 32px; }
+            .qr-tab span { display: none; }
+        }
+
+        @media (max-width: 500px) {
+            .header h1 { font-size: 28px; }
+            .form-row { grid-template-columns: 1fr; }
+            .customize-body { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+    <div class="bg-pattern"></div>
+
+    <!-- Header -->
+    <header class="header">
+        <div class="header-badge">
+            <span class="header-badge-dot"></span>
+            100% Free • Unlimited • No Signup
+        </div>
+        <h1><span>QR Code</span> Generator</h1>
+        <p>Create beautiful QR codes with custom colors, logos & styles</p>
+    </header>
+
+    <!-- Tabs -->
+    <div class="qr-tabs">
+        <button class="qr-tab active" data-type="text">
+            <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><path d="M14 2v6h6M16 13H8M16 17H8"/></svg>
+            <span>Text</span>
+        </button>
+        <button class="qr-tab" data-type="url">
+            <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M10 13a5 5 0 007.54.54l3-3a5 5 0 00-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 00-7.54-.54l-3 3a5 5 0 007.07 7.07l1.71-1.71"/></svg>
+            <span>URL</span>
+        </button>
+        <button class="qr-tab" data-type="email">
+            <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><path d="M22 6l-10 7L2 6"/></svg>
+            <span>Email</span>
+        </button>
+        <button class="qr-tab" data-type="whatsapp">
+            <svg fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+            <span>WhatsApp</span>
+        </button>
+        <button class="qr-tab" data-type="upi">
+            <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 8v8M8 12h8"/></svg>
+            <span>UPI Pay</span>
+        </button>
+        <button class="qr-tab" data-type="wifi">
+            <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M5 12.55a11 11 0 0114.08 0M1.42 9a16 16 0 0121.16 0M8.53 16.11a6 6 0 016.95 0M12 20h.01"/></svg>
+            <span>WiFi</span>
+        </button>
+        <button class="qr-tab" data-type="vcard">
+            <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+            <span>Contact</span>
+        </button>
+    </div>
+
+    <!-- Main -->
+    <div class="container">
+        <div class="main-grid">
+            <!-- Form -->
+            <div class="card">
+                <div class="form-header">
+                    <div class="form-icon">
+                        <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><path d="M14 2v6h6"/></svg>
+                    </div>
+                    <div class="form-title">
+                        <h2 id="formTitle">Text QR</h2>
+                        <p id="formSubtitle">Plain text</p>
+                    </div>
+                </div>
+                <div class="form-body">
+                    <!-- Text -->
+                    <div class="form-section active" id="form-text">
+                        <div class="form-group">
+                            <label class="form-label">Your Text</label>
+                            <textarea class="form-textarea qr-input" id="textInput" placeholder="Enter any text..."></textarea>
+                        </div>
+                    </div>
+
+                    <!-- URL -->
+                    <div class="form-section" id="form-url">
+                        <div class="form-group">
+                            <label class="form-label">Website URL</label>
+                            <input type="text" class="form-input qr-input" id="urlInput" placeholder="https://example.com">
+                        </div>
+                    </div>
+
+                    <!-- Email -->
+                    <div class="form-section" id="form-email">
+                        <div class="form-group">
+                            <label class="form-label">Email Address</label>
+                            <input type="email" class="form-input qr-input" id="emailTo" placeholder="email@example.com">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Subject <span>(Optional)</span></label>
+                            <input type="text" class="form-input qr-input" id="emailSubject" placeholder="Subject">
+                        </div>
+                    </div>
+
+                    <!-- WhatsApp -->
+                    <div class="form-section" id="form-whatsapp">
+                        <div class="form-group">
+                            <label class="form-label">WhatsApp Number</label>
+                            <input type="text" class="form-input qr-input" id="waNumber" placeholder="919876543210">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Message <span>(Optional)</span></label>
+                            <input type="text" class="form-input qr-input" id="waMessage" placeholder="Hi!">
+                        </div>
+                    </div>
+
+                    <!-- UPI -->
+                    <div class="form-section" id="form-upi">
+                        <div class="form-group">
+                            <label class="form-label">UPI ID</label>
+                            <input type="text" class="form-input qr-input" id="upiId" placeholder="name@paytm">
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label class="form-label">Name</label>
+                                <input type="text" class="form-input qr-input" id="upiName" placeholder="Name">
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">Amount <span>(Opt)</span></label>
+                                <input type="number" class="form-input qr-input" id="upiAmount" placeholder="0">
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- WiFi -->
+                    <div class="form-section" id="form-wifi">
+                        <div class="form-group">
+                            <label class="form-label">Network Name</label>
+                            <input type="text" class="form-input qr-input" id="wifiName" placeholder="WiFi Name">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Password</label>
+                            <input type="text" class="form-input qr-input" id="wifiPassword" placeholder="Password">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Security</label>
+                            <div class="radio-group" id="wifiType">
+                                <div class="radio-btn active" data-value="WPA">WPA</div>
+                                <div class="radio-btn" data-value="WEP">WEP</div>
+                                <div class="radio-btn" data-value="nopass">Open</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- vCard -->
+                    <div class="form-section" id="form-vcard">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label class="form-label">Name</label>
+                                <input type="text" class="form-input qr-input" id="vcardName" placeholder="John Doe">
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">Phone</label>
+                                <input type="text" class="form-input qr-input" id="vcardPhone" placeholder="+91...">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Email</label>
+                            <input type="email" class="form-input qr-input" id="vcardEmail" placeholder="email@example.com">
+                        </div>
+                    </div>
+
+                    <div class="btn-group">
+                        <button class="btn btn-primary" id="generateBtn">
+                            <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+                            Generate
+                        </button>
+                        <button class="btn btn-reset" id="resetBtn" title="Clear">
+                            <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M3 6h18M19 6v14a2 2 0 01-2 2H7a2 2 0 01-2-2V6m3 0V4a2 2 0 012-2h4a2 2 0 012 2v2"/></svg>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Preview -->
+            <div class="card">
+                <div class="preview-body">
+                    <div class="preview-title">Your QR Code</div>
+                    <div class="qr-box" id="qrBox">
+                        <div class="qr-placeholder" id="placeholder">
+                            <svg fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="3" height="3"/><rect x="18" y="14" width="3" height="3"/><rect x="14" y="18" width="3" height="3"/><rect x="18" y="18" width="3" height="3"/></svg>
+                            <p>No QR Code Yet</p>
+                            <span>Fill form & click Generate</span>
+                        </div>
+                        <canvas id="qrCanvas" style="display:none;"></canvas>
+                    </div>
+                    <button class="btn btn-download" id="downloadBtn" style="display:none;">
+                        <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg>
+                        Download PNG
+                    </button>
+                </div>
+            </div>
+
+            <!-- Customize -->
+            <div class="card customize-card">
+                <div class="customize-header">
+                    <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="13.5" cy="6.5" r=".5" fill="currentColor"/><circle cx="17.5" cy="10.5" r=".5" fill="currentColor"/><circle cx="8.5" cy="7.5" r=".5" fill="currentColor"/><circle cx="6.5" cy="12.5" r=".5" fill="currentColor"/><path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10c.926 0 1.648-.746 1.648-1.688 0-.437-.18-.835-.437-1.125-.29-.289-.438-.652-.438-1.125a1.64 1.64 0 011.668-1.668h1.996c3.051 0 5.555-2.503 5.555-5.555C21.965 6.012 17.461 2 12 2z"/></svg>
+                    Customize
+                </div>
+                <div class="customize-body">
+                    <!-- Logo -->
+                    <div class="customize-section">
+                        <label class="customize-label">Custom Logo</label>
+                        <div class="logo-upload" id="logoUpload">
+                            <input type="file" id="logoInput" accept="image/*">
+                            <div class="logo-upload-text" id="uploadText">
+                                <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+                                Upload
+                            </div>
+                            <div class="logo-preview" id="logoPreview">
+                                <img id="logoImg" src="" alt="">
+                                <span id="logoName">logo.png</span>
+                                <button class="logo-remove" id="logoRemove" type="button">
+                                    <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M18 6L6 18M6 6l12 12"/></svg>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Style -->
+                    <div class="customize-section">
+                        <label class="customize-label">QR Style</label>
+                        <div class="style-toggle">
+                            <button class="style-btn active" data-style="squares">
+                                <svg fill="currentColor" viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
+                                Squares
+                            </button>
+                            <button class="style-btn" data-style="dots">
+                                <svg fill="currentColor" viewBox="0 0 24 24"><circle cx="6" cy="6" r="3"/><circle cx="18" cy="6" r="3"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="18" r="3"/></svg>
+                                Dots
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- QR Color -->
+                    <div class="customize-section">
+                        <label class="customize-label">QR Color</label>
+                        <div class="color-section">
+                            <div class="color-grid" id="qrColors">
+                                <div class="color-dot active" style="background:#000000" data-color="#000000"></div>
+                                <div class="color-dot" style="background:#1e3a5f" data-color="#1e3a5f"></div>
+                                <div class="color-dot" style="background:#7c3aed" data-color="#7c3aed"></div>
+                                <div class="color-dot" style="background:#2563eb" data-color="#2563eb"></div>
+                                <div class="color-dot" style="background:#059669" data-color="#059669"></div>
+                                <div class="color-dot" style="background:#dc2626" data-color="#dc2626"></div>
+                                <div class="color-dot" style="background:#ea580c" data-color="#ea580c"></div>
+                                <div class="color-dot" style="background:#db2777" data-color="#db2777"></div>
+                            </div>
+                            <div class="color-picker-wrap">
+                                <div class="color-picker-btn">
+                                    <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707"/></svg>
+                                </div>
+                                <input type="color" class="color-picker-input" id="qrColorPicker" value="#000000">
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- BG Color -->
+                    <div class="customize-section">
+                        <label class="customize-label">Background Color</label>
+                        <div class="color-section">
+                            <div class="color-grid" id="bgColors">
+                                <div class="color-dot white-dot active" style="background:#ffffff" data-color="#ffffff"></div>
+                                <div class="color-dot" style="background:#f3f4f6" data-color="#f3f4f6"></div>
+                                <div class="color-dot" style="background:#fef3c7" data-color="#fef3c7"></div>
+                                <div class="color-dot" style="background:#dbeafe" data-color="#dbeafe"></div>
+                                <div class="color-dot" style="background:#d1fae5" data-color="#d1fae5"></div>
+                                <div class="color-dot" style="background:#fce7f3" data-color="#fce7f3"></div>
+                                <div class="color-dot" style="background:#ede9fe" data-color="#ede9fe"></div>
+                                <div class="color-dot" style="background:#fef9c3" data-color="#fef9c3"></div>
+                            </div>
+                            <div class="color-picker-wrap">
+                                <div class="color-picker-btn">
+                                    <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707"/></svg>
+                                </div>
+                                <input type="color" class="color-picker-input" id="bgColorPicker" value="#ffffff">
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Size -->
+                    <div class="customize-section">
+                        <label class="customize-label">Size</label>
+                        <div class="size-wrap">
+                            <input type="range" class="size-slider" id="sizeSlider" min="150" max="300" value="220">
+                            <span class="size-value" id="sizeValue">220px</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-features">
+            <span>
+                <svg width="18" height="18" fill="none" stroke="#10b981" stroke-width="2" viewBox="0 0 24 24">
+                    <path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/>
+                </svg>
+                No watermark
+            </span>
+            <span>
+                <svg width="18" height="18" fill="none" stroke="#6366f1" stroke-width="2" viewBox="0 0 24 24">
+                    <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/>
+                    <path d="M7 11V7a5 5 0 0110 0v4"/>
+                </svg>
+                Private
+            </span>
+            <span>
+                <svg width="18" height="18" fill="none" stroke="#f59e0b" stroke-width="2" viewBox="0 0 24 24">
+                    <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/>
+                </svg>
+                Instant
+            </span>
+            <span>
+                <svg width="18" height="18" fill="none" stroke="#ec4899" stroke-width="2" viewBox="0 0 24 24">
+                    <rect x="3" y="3" width="18" height="18" rx="2"/>
+                    <circle cx="8.5" cy="8.5" r="1.5"/>
+                    <path d="M21 15l-5-5L5 21"/>
+                </svg>
+                Custom Logo
+            </span>
+        </div>
+        <p>Made with <svg width="16" height="16" fill="#ef4444" viewBox="0 0 24 24" style="vertical-align: middle;"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg> | Free QR Code Generator</p>
+    </footer>
+
+    <script>
+        // Lightweight QR Code Generator
+        const QRCodeGenerator = (() => {
+            const EC_LEVEL = { L: 1, M: 0, Q: 3, H: 2 };
+            
+            function generate(text, ecLevel = 'M') {
+                const data = encodeData(text);
+                const version = getVersion(data.length, EC_LEVEL[ecLevel]);
+                const size = version * 4 + 17;
+                const matrix = createMatrix(size);
+                
+                addFinderPatterns(matrix, size);
+                addAlignmentPatterns(matrix, version);
+                addTimingPatterns(matrix, size);
+                addDarkModule(matrix, version);
+                
+                const dataWithEC = addErrorCorrection(data, version, EC_LEVEL[ecLevel]);
+                const maskedMatrix = addDataAndMask(matrix, dataWithEC, size);
+                
+                return maskedMatrix;
+            }
+            
+            function encodeData(text) {
+                const bytes = [];
+                bytes.push(0x40 | (text.length >> 4));
+                bytes.push(((text.length & 0xF) << 4) | (text.charCodeAt(0) >> 4));
+                for (let i = 0; i < text.length; i++) {
+                    const c = text.charCodeAt(i);
+                    if (i + 1 < text.length) {
+                        bytes.push(((c & 0xF) << 4) | (text.charCodeAt(i + 1) >> 4));
+                    } else {
+                        bytes.push((c & 0xF) << 4);
+                    }
+                }
+                return bytes;
+            }
+            
+            function getVersion(dataLen, ecLevel) {
+                const capacities = [0, 17, 32, 53, 78, 106, 134, 154, 192, 230, 271, 321, 367, 425, 458, 520, 586, 644, 718, 792, 858];
+                for (let v = 1; v <= 20; v++) {
+                    if (capacities[v] >= dataLen) return v;
+                }
+                return 20;
+            }
+            
+            function createMatrix(size) {
+                return Array(size).fill(null).map(() => Array(size).fill(null));
+            }
+            
+            function addFinderPatterns(matrix, size) {
+                const positions = [[0, 0], [size - 7, 0], [0, size - 7]];
+                positions.forEach(([row, col]) => {
+                    for (let r = 0; r < 7; r++) {
+                        for (let c = 0; c < 7; c++) {
+                            const isOuter = r === 0 || r === 6 || c === 0 || c === 6;
+                            const isInner = r >= 2 && r <= 4 && c >= 2 && c <= 4;
+                            matrix[row + r][col + c] = isOuter || isInner;
+                        }
+                    }
+                });
+                
+                // Separators
+                for (let i = 0; i < 8; i++) {
+                    if (matrix[7]) matrix[7][i] = false;
+                    if (matrix[i]) matrix[i][7] = false;
+                    if (matrix[7]) matrix[7][size - 1 - i] = false;
+                    if (matrix[i]) matrix[i][size - 8] = false;
+                    if (matrix[size - 8]) matrix[size - 8][i] = false;
+                    if (matrix[i]) matrix[i][7] = false;
+                }
+            }
+            
+            function addAlignmentPatterns(matrix, version) {
+                if (version < 2) return;
+                const positions = getAlignmentPositions(version);
+                positions.forEach(row => {
+                    positions.forEach(col => {
+                        if (matrix[row] && matrix[row][col] === null) {
+                            for (let r = -2; r <= 2; r++) {
+                                for (let c = -2; c <= 2; c++) {
+                                    if (matrix[row + r]) {
+                                        const isOuter = Math.abs(r) === 2 || Math.abs(c) === 2;
+                                        const isCenter = r === 0 && c === 0;
+                                        matrix[row + r][col + c] = isOuter || isCenter;
+                                    }
+                                }
+                            }
+                        }
+                    });
+                });
+            }
+            
+            function getAlignmentPositions(version) {
+                if (version === 1) return [];
+                const positions = [6];
+                const step = Math.floor((version * 4 + 10) / (Math.floor(version / 7) + 1));
+                let pos = version * 4 + 10;
+                while (pos > 10) {
+                    positions.unshift(pos);
+                    pos -= step;
+                }
+                return positions;
+            }
+            
+            function addTimingPatterns(matrix, size) {
+                for (let i = 8; i < size - 8; i++) {
+                    const bit = i % 2 === 0;
+                    if (matrix[6][i] === null) matrix[6][i] = bit;
+                    if (matrix[i][6] === null) matrix[i][6] = bit;
+                }
+            }
+            
+            function addDarkModule(matrix, version) {
+                matrix[(4 * version) + 9][8] = true;
+            }
+            
+            function addErrorCorrection(data, version, ecLevel) {
+                const totalBytes = getTotalBytes(version);
+                const result = new Array(totalBytes).fill(0);
+                for (let i = 0; i < Math.min(data.length, totalBytes); i++) {
+                    result[i] = data[i];
+                }
+                // Add padding
+                let pad = 0xEC;
+                for (let i = data.length; i < totalBytes; i++) {
+                    result[i] = pad;
+                    pad = pad === 0xEC ? 0x11 : 0xEC;
+                }
+                return result;
+            }
+            
+            function getTotalBytes(version) {
+                return [0, 26, 44, 70, 100, 134, 172, 196, 242, 292, 346, 404, 466, 532, 581, 655, 733, 815, 901, 991, 1085][version] || 26;
+            }
+            
+            function addDataAndMask(matrix, data, size) {
+                let bitIndex = 0;
+                let byteIndex = 0;
+                let upward = true;
+                
+                for (let col = size - 1; col >= 0; col -= 2) {
+                    if (col === 6) col--;
+                    
+                    const rows = upward ? 
+                        Array.from({length: size}, (_, i) => size - 1 - i) : 
+                        Array.from({length: size}, (_, i) => i);
+                    
+                    for (const row of rows) {
+                        for (let c = 0; c < 2; c++) {
+                            const currentCol = col - c;
+                            if (matrix[row][currentCol] === null) {
+                                let bit = false;
+                                if (byteIndex < data.length) {
+                                    bit = ((data[byteIndex] >> (7 - bitIndex)) & 1) === 1;
+                                    bitIndex++;
+                                    if (bitIndex === 8) {
+                                        bitIndex = 0;
+                                        byteIndex++;
+                                    }
+                                }
+                                // Apply mask 0: (row + col) % 2 === 0
+                                if ((row + currentCol) % 2 === 0) bit = !bit;
+                                matrix[row][currentCol] = bit;
+                            }
+                        }
+                    }
+                    upward = !upward;
+                }
+                
+                // Fill remaining null cells
+                for (let r = 0; r < size; r++) {
+                    for (let c = 0; c < size; c++) {
+                        if (matrix[r][c] === null) matrix[r][c] = false;
+                    }
+                }
+                
+                return matrix;
+            }
+            
+            return { generate };
+        })();
+
+        // App State
+        let currentType = 'text';
+        let qrColor = '#000000';
+        let bgColor = '#ffffff';
+        let qrSize = 220;
+        let qrStyle = 'squares';
+        let logoData = null;
+        let currentValue = '';
+        let qrGenerated = false;
+
+        const formInfo = {
+            text: { title: 'Text QR', subtitle: 'Plain text' },
+            url: { title: 'URL QR', subtitle: 'Website link' },
+            email: { title: 'Email QR', subtitle: 'Send email' },
+            whatsapp: { title: 'WhatsApp QR', subtitle: 'Direct chat' },
+            upi: { title: 'UPI Pay', subtitle: 'Payment QR' },
+            wifi: { title: 'WiFi QR', subtitle: 'Auto connect' },
+            vcard: { title: 'Contact QR', subtitle: 'Save contact' }
+        };
+
+        // Helpers
+        const $ = id => document.getElementById(id);
+        const $$ = sel => document.querySelectorAll(sel);
+
+        // Get QR Value
+        function getQRValue() {
+            let value = '';
+            switch(currentType) {
+                case 'text':
+                    value = $('textInput').value;
+                    break;
+                case 'url':
+                    let url = $('urlInput').value;
+                    value = url.startsWith('http') ? url : (url ? 'https://' + url : '');
+                    break;
+                case 'email':
+                    if ($('emailTo').value) {
+                        value = 'mailto:' + $('emailTo').value;
+                        if ($('emailSubject').value) value += '?subject=' + encodeURIComponent($('emailSubject').value);
+                    }
+                    break;
+                case 'whatsapp':
+                    let num = $('waNumber').value.replace(/\D/g, '');
+                    if (num) {
+                        value = 'https://wa.me/' + num;
+                        if ($('waMessage').value) value += '?text=' + encodeURIComponent($('waMessage').value);
+                    }
+                    break;
+                case 'upi':
+                    if ($('upiId').value) {
+                        value = 'upi://pay?pa=' + $('upiId').value + '&pn=' + encodeURIComponent($('upiName').value || 'Name');
+                        if ($('upiAmount').value) value += '&am=' + $('upiAmount').value;
+                    }
+                    break;
+                case 'wifi':
+                    if ($('wifiName').value) {
+                        let type = document.querySelector('#wifiType .radio-btn.active')?.dataset.value || 'WPA';
+                        value = 'WIFI:T:' + type + ';S:' + $('wifiName').value + ';P:' + $('wifiPassword').value + ';;';
+                    }
+                    break;
+                case 'vcard':
+                    if ($('vcardName').value) {
+                        value = 'BEGIN:VCARD\nVERSION:3.0\nFN:' + $('vcardName').value;
+                        if ($('vcardPhone').value) value += '\nTEL:' + $('vcardPhone').value;
+                        if ($('vcardEmail').value) value += '\nEMAIL:' + $('vcardEmail').value;
+                        value += '\nEND:VCARD';
+                    }
+                    break;
+            }
+            return value;
+        }
+
+        // Draw QR Code
+        function drawQR() {
+            const value = getQRValue();
+            if (!value) return;
+            
+            currentValue = value;
+            qrGenerated = true;
+
+            const matrix = QRCodeGenerator.generate(value, 'M');
+            const moduleCount = matrix.length;
+            const cellSize = Math.floor(qrSize / moduleCount);
+            const size = cellSize * moduleCount;
+
+            const canvas = $('qrCanvas');
+            const ctx = canvas.getContext('2d');
+            canvas.width = size;
+            canvas.height = size;
+
+            // Background
+            ctx.fillStyle = bgColor;
+            ctx.fillRect(0, 0, size, size);
+
+            // Draw QR modules
+            ctx.fillStyle = qrColor;
+            for (let row = 0; row < moduleCount; row++) {
+                for (let col = 0; col < moduleCount; col++) {
+                    if (matrix[row][col]) {
+                        const x = col * cellSize;
+                        const y = row * cellSize;
+                        if (qrStyle === 'dots') {
+                            ctx.beginPath();
+                            ctx.arc(x + cellSize/2, y + cellSize/2, cellSize * 0.4, 0, Math.PI * 2);
+                            ctx.fill();
+                        } else {
+                            ctx.fillRect(x, y, cellSize, cellSize);
+                        }
+                    }
+                }
+            }
+
+            // Add logo if present
+            if (logoData) {
+                const img = new Image();
+                img.onload = () => {
+                    const logoSize = size * 0.22;
+                    const logoX = (size - logoSize) / 2;
+                    const logoY = (size - logoSize) / 2;
+                    
+                    // White background for logo
+                    ctx.fillStyle = bgColor;
+                    const padding = 6;
+                    ctx.fillRect(logoX - padding, logoY - padding, logoSize + padding*2, logoSize + padding*2);
+                    
+                    ctx.drawImage(img, logoX, logoY, logoSize, logoSize);
+                };
+                img.src = logoData;
+            }
+
+            // Show canvas
+            $('placeholder').style.display = 'none';
+            canvas.style.display = 'block';
+            $('qrBox').classList.add('has-qr');
+            $('downloadBtn').style.display = 'flex';
+        }
+
+        // Update QR (only if already generated)
+        function updateQR() {
+            if (qrGenerated && getQRValue()) {
+                drawQR();
+            }
+        }
+
+        // Init
+        document.addEventListener('DOMContentLoaded', () => {
+            // Tabs
+            $$('.qr-tab').forEach(tab => {
+                tab.addEventListener('click', () => {
+                    $$('.qr-tab').forEach(t => t.classList.remove('active'));
+                    tab.classList.add('active');
+                    currentType = tab.dataset.type;
+                    $('formTitle').textContent = formInfo[currentType].title;
+                    $('formSubtitle').textContent = formInfo[currentType].subtitle;
+                    $$('.form-section').forEach(s => s.classList.remove('active'));
+                    $('form-' + currentType).classList.add('active');
+                });
+            });
+
+            // WiFi radio
+            $$('#wifiType .radio-btn').forEach(btn => {
+                btn.addEventListener('click', () => {
+                    $$('#wifiType .radio-btn').forEach(b => b.classList.remove('active'));
+                    btn.classList.add('active');
+                    updateQR();
+                });
+            });
+
+            // QR Colors - Instant update
+            $$('#qrColors .color-dot').forEach(dot => {
+                dot.addEventListener('click', () => {
+                    $$('#qrColors .color-dot').forEach(d => d.classList.remove('active'));
+                    dot.classList.add('active');
+                    qrColor = dot.dataset.color;
+                    $('qrColorPicker').value = qrColor;
+                    updateQR();
+                });
+            });
+
+            // BG Colors - Instant update
+            $$('#bgColors .color-dot').forEach(dot => {
+                dot.addEventListener('click', () => {
+                    $$('#bgColors .color-dot').forEach(d => d.classList.remove('active'));
+                    dot.classList.add('active');
+                    bgColor = dot.dataset.color;
+                    $('bgColorPicker').value = bgColor;
+                    updateQR();
+                });
+            });
+
+            // QR Color Picker - Instant update
+            $('qrColorPicker').addEventListener('input', e => {
+                qrColor = e.target.value;
+                $$('#qrColors .color-dot').forEach(d => d.classList.remove('active'));
+                updateQR();
+            });
+
+            // BG Color Picker - Instant update
+            $('bgColorPicker').addEventListener('input', e => {
+                bgColor = e.target.value;
+                $$('#bgColors .color-dot').forEach(d => d.classList.remove('active'));
+                updateQR();
+            });
+
+            // Style toggle - Instant update
+            $$('.style-btn').forEach(btn => {
+                btn.addEventListener('click', () => {
+                    $$('.style-btn').forEach(b => b.classList.remove('active'));
+                    btn.classList.add('active');
+                    qrStyle = btn.dataset.style;
+                    updateQR();
+                });
+            });
+
+            // Size slider - Instant update
+            $('sizeSlider').addEventListener('input', e => {
+                qrSize = parseInt(e.target.value);
+                $('sizeValue').textContent = qrSize + 'px';
+                updateQR();
+            });
+
+            // Logo upload - Instant update
+            $('logoInput').addEventListener('change', e => {
+                const file = e.target.files[0];
+                if (file) {
+                    const reader = new FileReader();
+                    reader.onload = ev => {
+                        logoData = ev.target.result;
+                        $('logoImg').src = logoData;
+                        $('logoName').textContent = file.name;
+                        $('uploadText').style.display = 'none';
+                        $('logoPreview').style.display = 'flex';
+                        $('logoUpload').classList.add('has-logo');
+                        updateQR();
+                    };
+                    reader.readAsDataURL(file);
+                }
+            });
+
+            // Logo remove - Instant update
+            $('logoRemove').addEventListener('click', e => {
+                e.preventDefault();
+                e.stopPropagation();
+                logoData = null;
+                $('logoInput').value = '';
+                $('uploadText').style.display = 'flex';
+                $('logoPreview').style.display = 'none';
+                $('logoUpload').classList.remove('has-logo');
+                updateQR();
+            });
+
+            // Generate button
+            $('generateBtn').addEventListener('click', () => {
+                const value = getQRValue();
+                if (!value) {
+                    alert('Please fill required fields');
+                    return;
+                }
+                drawQR();
+            });
+
+            // Reset
+            $('resetBtn').addEventListener('click', () => {
+                $$('.qr-input').forEach(i => i.value = '');
+                $('placeholder').style.display = 'block';
+                $('qrCanvas').style.display = 'none';
+                $('qrBox').classList.remove('has-qr');
+                $('downloadBtn').style.display = 'none';
+                qrGenerated = false;
+                currentValue = '';
+                
+                // Reset logo
+                logoData = null;
+                $('logoInput').value = '';
+                $('uploadText').style.display = 'flex';
+                $('logoPreview').style.display = 'none';
+                $('logoUpload').classList.remove('has-logo');
+            });
+
+            // Download
+            $('downloadBtn').addEventListener('click', () => {
+                const canvas = $('qrCanvas');
+                const link = document.createElement('a');
+                link.download = 'qr-' + currentType + '-' + Date.now() + '.png';
+                link.href = canvas.toDataURL('image/png');
+                link.click();
+            });
+        });
+    </script>
+</body>
+</html>
