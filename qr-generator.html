@@ -3,8 +3,93 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>QR Code Generator - Free Online Tool</title>
-    <meta name="description" content="Free QR Code Generator with custom colors, logos & styles. Real-time preview!">
+    <title>Free QR Code Generator Online - Custom Colors, Logo & Styles | EasyWebTools</title>
+    <meta name="description" content="Create free QR codes instantly with custom colors, logos, dots style & high resolution. Generate QR for URL, WiFi, WhatsApp, UPI, vCard & more. No signup required!">
+    <meta name="keywords" content="QR code generator, free QR code, QR code maker, custom QR code, QR code with logo, WiFi QR code, WhatsApp QR, UPI QR code, vCard QR, URL QR code, online QR generator">
+    <meta name="author" content="EasyWebTools">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://easywebtools.in/qr-generator">
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://easywebtools.in/qr-generator">
+    <meta property="og:title" content="Free QR Code Generator - Custom Colors, Logo & Styles">
+    <meta property="og:description" content="Create beautiful QR codes instantly with custom colors, logos & styles. 100% free, no signup required!">
+    <meta property="og:image" content="https://easywebtools.in/images/qr-generator-og.png">
+    
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:url" content="https://easywebtools.in/qr-generator">
+    <meta name="twitter:title" content="Free QR Code Generator - Custom Colors, Logo & Styles">
+    <meta name="twitter:description" content="Create beautiful QR codes instantly with custom colors, logos & styles. 100% free, no signup required!">
+    
+    <!-- Structured Data -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "WebApplication",
+        "name": "Free QR Code Generator",
+        "url": "https://easywebtools.in/qr-generator",
+        "description": "Create free QR codes with custom colors, logos and styles. Generate QR for URL, WiFi, WhatsApp, UPI, vCard and more.",
+        "applicationCategory": "UtilityApplication",
+        "operatingSystem": "Any",
+        "offers": {
+            "@type": "Offer",
+            "price": "0",
+            "priceCurrency": "USD"
+        },
+        "featureList": ["Custom QR Colors", "Logo Upload", "Dots & Square Styles", "WiFi QR Code", "WhatsApp QR", "UPI Payment QR", "vCard Contact QR", "High Resolution Download"]
+    }
+    </script>
+    
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": [
+            {
+                "@type": "Question",
+                "name": "Is this QR Code Generator completely free?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Yes! Our QR Code Generator is 100% free with unlimited QR codes, no watermarks, and no signup required."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "Can I add my logo to the QR code?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Yes, you can upload your custom logo and it will be placed in the center of the QR code with high error correction."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "What types of QR codes can I create?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "You can create QR codes for: Plain Text, Website URLs, Email, WhatsApp messages, UPI Payments, WiFi networks, and vCard contacts."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "Are the QR codes scannable on all devices?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Yes, all QR codes generated are fully scannable on any smartphone camera or QR scanner app."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "Can I customize the colors of my QR code?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Yes! You can customize both the QR code color and background color with preset colors or custom color picker."
+                }
+            }
+        ]
+    }
+    </script>
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -88,6 +173,7 @@
             background: linear-gradient(135deg, var(--primary), #ec4899);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
+            background-clip: text;padding-right:10px;
             font-style: italic;
         }
         .header p { color: var(--gray-500); font-size: 16px; }
@@ -254,7 +340,8 @@
         .btn-reset {
             width: 48px;
             background: var(--gray-100);
-            color: var(--gray-500);padding:0;
+            color: var(--gray-500);
+            padding: 0;
         }
         .btn-reset:hover { background: var(--gray-200); }
 
@@ -291,11 +378,8 @@
         .qr-placeholder p { font-size: 15px; font-weight: 600; color: var(--gray-500); }
         .qr-placeholder span { font-size: 13px; color: var(--gray-400); }
 
-        #qrCanvas { border-radius: 8px; max-width: 100%; height: auto; }
-        
-        #qrContainer { display: none; }
-        #qrContainer img { border-radius: 8px; }
-        #qrContainer canvas { border-radius: 8px; }
+        #qrCanvas { border-radius: 8px; max-width: 100%; height: auto; display: none; }
+        #qrHidden { position: absolute; left: -9999px; visibility: hidden; }
 
         /* Customize Card */
         .customize-header {
@@ -407,9 +491,7 @@
         .color-dot.white-dot { border: 2px solid var(--gray-300); }
 
         /* Color Picker */
-        .color-picker-wrap {
-            position: relative;
-        }
+        .color-picker-wrap { position: relative; }
 
         .color-picker-btn {
             width: 28px;
@@ -462,10 +544,206 @@
         }
         .size-value { font-size: 14px; font-weight: 600; color: var(--gray-600); min-width: 45px; text-align: right; }
 
+        /* Content Sections */
+        .content-section {
+            padding: 60px 20px;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            font-size: 28px;
+            font-weight: 800;
+            text-align: center;
+            margin-bottom: 16px;
+            color: var(--gray-900);
+        }
+
+        .section-subtitle {
+            text-align: center;
+            color: var(--gray-500);
+            font-size: 16px;
+            margin-bottom: 40px;
+            line-height: 1.6;
+        }
+
+        /* Features Grid */
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 24px;
+            margin-bottom: 40px;
+        }
+
+        .feature-card {
+            background: var(--white);
+            border: 1px solid var(--gray-200);
+            border-radius: 16px;
+            padding: 24px;
+            text-align: center;
+            transition: all 0.2s;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 24px rgba(0,0,0,0.08);
+        }
+
+        .feature-icon {
+            width: 56px;
+            height: 56px;
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            border-radius: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 16px;
+        }
+
+        .feature-icon svg {
+            width: 28px;
+            height: 28px;
+            color: white;
+        }
+
+        .feature-card h3 {
+            font-size: 18px;
+            font-weight: 700;
+            margin-bottom: 8px;
+            color: var(--gray-900);
+        }
+
+        .feature-card p {
+            font-size: 14px;
+            color: var(--gray-500);
+            line-height: 1.6;
+        }
+
+        /* Steps */
+        .steps-container {
+            display: flex;
+            flex-direction: column;
+            gap: 24px;
+        }
+
+        .step-item {
+            display: flex;
+            gap: 20px;
+            align-items: flex-start;
+        }
+
+        .step-number {
+            width: 48px;
+            height: 48px;
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 20px;
+            font-weight: 800;
+            flex-shrink: 0;
+        }
+
+        .step-content h3 {
+            font-size: 18px;
+            font-weight: 700;
+            margin-bottom: 6px;
+            color: var(--gray-900);
+        }
+
+        .step-content p {
+            font-size: 15px;
+            color: var(--gray-500);
+            line-height: 1.6;
+        }
+
+        /* FAQ Section */
+        .faq-container {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .faq-item {
+            background: var(--white);
+            border: 1px solid var(--gray-200);
+            border-radius: 12px;
+            overflow: hidden;
+        }
+
+        .faq-question {
+            width: 100%;
+            padding: 20px 24px;
+            background: none;
+            border: none;
+            text-align: left;
+            font-size: 16px;
+            font-weight: 600;
+            color: var(--gray-900);
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-family: inherit;
+        }
+
+        .faq-question:hover { background: var(--gray-50); }
+
+        .faq-question svg {
+            width: 20px;
+            height: 20px;
+            color: var(--gray-400);
+            transition: transform 0.3s;
+            flex-shrink: 0;
+        }
+
+        .faq-item.active .faq-question svg { transform: rotate(180deg); }
+
+        .faq-answer {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+        }
+
+        .faq-answer-inner {
+            padding: 0 24px 20px;
+            font-size: 15px;
+            color: var(--gray-600);
+            line-height: 1.7;
+        }
+
+        .faq-item.active .faq-answer { max-height: 300px; }
+
+        /* About Section */
+        .about-content {
+            background: var(--white);
+            border: 1px solid var(--gray-200);
+            border-radius: 16px;
+            padding: 32px;
+        }
+
+        .about-content h3 {
+            font-size: 20px;
+            font-weight: 700;
+            margin-bottom: 16px;
+            color: var(--gray-900);
+        }
+
+        .about-content p {
+            font-size: 15px;
+            color: var(--gray-600);
+            line-height: 1.8;
+            margin-bottom: 16px;
+        }
+
+        .about-content p:last-child { margin-bottom: 0; }
+
         /* Footer */
         .footer { text-align: center; padding: 30px 20px 40px; color: var(--gray-500); }
         .footer-features { display: flex; justify-content: center; gap: 24px; margin-bottom: 16px; flex-wrap: wrap; font-size: 14px; }
-        .footer-features span{display:flex;align-items:center;gap:0 4px;}
+        .footer-features span { display: flex; align-items: center; gap: 4px; }
         
         /* Responsive */
         @media (max-width: 1100px) {
@@ -481,6 +759,9 @@
             .customize-body { grid-template-columns: 1fr 1fr; }
             .header h1 { font-size: 32px; }
             .qr-tab span { display: none; }
+            .section-title { font-size: 24px; }
+            .step-item { flex-direction: column; text-align: center; }
+            .step-number { margin: 0 auto; }
         }
 
         @media (max-width: 500px) {
@@ -499,13 +780,13 @@
             <span class="header-badge-dot"></span>
             100% Free • Unlimited • No Signup
         </div>
-        <h1><span>QR Code</span> Generator</h1>
+        <h1><span>QR Code</span>Generator</h1>
         <p>Create beautiful QR codes with custom colors, logos & styles</p>
     </header>
 
     <!-- Tabs -->
-    <div class="qr-tabs">
-        <button class="qr-tab active" data-type="text">
+    <nav class="qr-tabs" aria-label="QR Code Types">
+        <button class="qr-tab active" data-type="text" aria-selected="true">
             <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><path d="M14 2v6h6M16 13H8M16 17H8"/></svg>
             <span>Text</span>
         </button>
@@ -533,10 +814,10 @@
             <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
             <span>Contact</span>
         </button>
-    </div>
+    </nav>
 
     <!-- Main -->
-    <div class="container">
+    <main class="container">
         <div class="main-grid">
             <!-- Form -->
             <div class="card">
@@ -553,7 +834,7 @@
                     <!-- Text -->
                     <div class="form-section active" id="form-text">
                         <div class="form-group">
-                            <label class="form-label">Your Text</label>
+                            <label class="form-label" for="textInput">Your Text</label>
                             <textarea class="form-textarea qr-input" id="textInput" placeholder="Enter any text..."></textarea>
                         </div>
                     </div>
@@ -561,7 +842,7 @@
                     <!-- URL -->
                     <div class="form-section" id="form-url">
                         <div class="form-group">
-                            <label class="form-label">Website URL</label>
+                            <label class="form-label" for="urlInput">Website URL</label>
                             <input type="text" class="form-input qr-input" id="urlInput" placeholder="https://example.com">
                         </div>
                     </div>
@@ -569,11 +850,11 @@
                     <!-- Email -->
                     <div class="form-section" id="form-email">
                         <div class="form-group">
-                            <label class="form-label">Email Address</label>
+                            <label class="form-label" for="emailTo">Email Address</label>
                             <input type="email" class="form-input qr-input" id="emailTo" placeholder="email@example.com">
                         </div>
                         <div class="form-group">
-                            <label class="form-label">Subject <span>(Optional)</span></label>
+                            <label class="form-label" for="emailSubject">Subject <span>(Optional)</span></label>
                             <input type="text" class="form-input qr-input" id="emailSubject" placeholder="Subject">
                         </div>
                     </div>
@@ -581,11 +862,11 @@
                     <!-- WhatsApp -->
                     <div class="form-section" id="form-whatsapp">
                         <div class="form-group">
-                            <label class="form-label">WhatsApp Number</label>
+                            <label class="form-label" for="waNumber">WhatsApp Number</label>
                             <input type="text" class="form-input qr-input" id="waNumber" placeholder="919876543210">
                         </div>
                         <div class="form-group">
-                            <label class="form-label">Message <span>(Optional)</span></label>
+                            <label class="form-label" for="waMessage">Message <span>(Optional)</span></label>
                             <input type="text" class="form-input qr-input" id="waMessage" placeholder="Hi!">
                         </div>
                     </div>
@@ -593,16 +874,16 @@
                     <!-- UPI -->
                     <div class="form-section" id="form-upi">
                         <div class="form-group">
-                            <label class="form-label">UPI ID</label>
+                            <label class="form-label" for="upiId">UPI ID</label>
                             <input type="text" class="form-input qr-input" id="upiId" placeholder="name@paytm">
                         </div>
                         <div class="form-row">
                             <div class="form-group">
-                                <label class="form-label">Name</label>
+                                <label class="form-label" for="upiName">Name</label>
                                 <input type="text" class="form-input qr-input" id="upiName" placeholder="Name">
                             </div>
                             <div class="form-group">
-                                <label class="form-label">Amount <span>(Opt)</span></label>
+                                <label class="form-label" for="upiAmount">Amount <span>(Opt)</span></label>
                                 <input type="number" class="form-input qr-input" id="upiAmount" placeholder="0">
                             </div>
                         </div>
@@ -611,11 +892,11 @@
                     <!-- WiFi -->
                     <div class="form-section" id="form-wifi">
                         <div class="form-group">
-                            <label class="form-label">Network Name</label>
+                            <label class="form-label" for="wifiName">Network Name</label>
                             <input type="text" class="form-input qr-input" id="wifiName" placeholder="WiFi Name">
                         </div>
                         <div class="form-group">
-                            <label class="form-label">Password</label>
+                            <label class="form-label" for="wifiPassword">Password</label>
                             <input type="text" class="form-input qr-input" id="wifiPassword" placeholder="Password">
                         </div>
                         <div class="form-group">
@@ -632,16 +913,16 @@
                     <div class="form-section" id="form-vcard">
                         <div class="form-row">
                             <div class="form-group">
-                                <label class="form-label">Name</label>
+                                <label class="form-label" for="vcardName">Name</label>
                                 <input type="text" class="form-input qr-input" id="vcardName" placeholder="John Doe">
                             </div>
                             <div class="form-group">
-                                <label class="form-label">Phone</label>
+                                <label class="form-label" for="vcardPhone">Phone</label>
                                 <input type="text" class="form-input qr-input" id="vcardPhone" placeholder="+91...">
                             </div>
                         </div>
                         <div class="form-group">
-                            <label class="form-label">Email</label>
+                            <label class="form-label" for="vcardEmail">Email</label>
                             <input type="email" class="form-input qr-input" id="vcardEmail" placeholder="email@example.com">
                         </div>
                     </div>
@@ -652,7 +933,7 @@
                             Generate
                         </button>
                         <button class="btn btn-reset" id="resetBtn" title="Clear">
-                            <svg  width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.0" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-refresh"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M20 11a8.1 8.1 0 0 0 -15.5 -2m-.5 -4v4h4" /><path d="M4 13a8.1 8.1 0 0 0 15.5 2m.5 4v-4h-4" /></svg>
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.0" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M20 11a8.1 8.1 0 0 0 -15.5 -2m-.5 -4v4h4" /><path d="M4 13a8.1 8.1 0 0 0 15.5 2m.5 4v-4h-4" /></svg>
                         </button>
                     </div>
                 </div>
@@ -668,9 +949,9 @@
                             <p>No QR Code Yet</p>
                             <span>Fill form & click Generate</span>
                         </div>
-                        <div id="qrContainer"></div>
-                        <canvas id="qrCanvas" style="display:none;"></canvas>
+                        <canvas id="qrCanvas"></canvas>
                     </div>
+                    <div id="qrHidden"></div>
                     <button class="btn btn-download" id="downloadBtn" style="display:none;">
                         <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg>
                         Download PNG
@@ -695,7 +976,7 @@
                                 Upload
                             </div>
                             <div class="logo-preview" id="logoPreview">
-                                <img id="logoImg" src="" alt="">
+                                <img id="logoImg" src="" alt="Logo preview">
                                 <span id="logoName">logo.png</span>
                                 <button class="logo-remove" id="logoRemove" type="button">
                                     <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M18 6L6 18M6 6l12 12"/></svg>
@@ -776,7 +1057,215 @@
                 </div>
             </div>
         </div>
-    </div>
+    </main>
+
+    <!-- Features Section -->
+    <section class="content-section" id="features">
+        <h2 class="section-title">Why Use Our QR Code Generator?</h2>
+        <p class="section-subtitle">Powerful features to create professional QR codes in seconds</p>
+        
+        <div class="features-grid">
+            <article class="feature-card">
+                <div class="feature-icon">
+                    <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/></svg>
+                </div>
+                <h3>100% Free Forever</h3>
+                <p>No hidden charges, no premium plans, no watermarks. Create unlimited QR codes completely free.</p>
+            </article>
+            
+            <article class="feature-card">
+                <div class="feature-icon">
+                    <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+                </div>
+                <h3>Custom Logo Support</h3>
+                <p>Add your brand logo to make your QR codes unique and recognizable. Perfect for business cards and marketing.</p>
+            </article>
+            
+            <article class="feature-card">
+                <div class="feature-icon">
+                    <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="13.5" cy="6.5" r=".5" fill="currentColor"/><circle cx="17.5" cy="10.5" r=".5" fill="currentColor"/><circle cx="8.5" cy="7.5" r=".5" fill="currentColor"/><path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10c.926 0 1.648-.746 1.648-1.688 0-.437-.18-.835-.437-1.125-.29-.289-.438-.652-.438-1.125a1.64 1.64 0 011.668-1.668h1.996c3.051 0 5.555-2.503 5.555-5.555C21.965 6.012 17.461 2 12 2z"/></svg>
+                </div>
+                <h3>Custom Colors & Styles</h3>
+                <p>Choose from squares or dots style. Customize QR and background colors to match your brand identity.</p>
+            </article>
+            
+            <article class="feature-card">
+                <div class="feature-icon">
+                    <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+                </div>
+                <h3>Instant Generation</h3>
+                <p>Real-time preview as you customize. No waiting, no page refresh. Download high-resolution PNG instantly.</p>
+            </article>
+            
+            <article class="feature-card">
+                <div class="feature-icon">
+                    <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg>
+                </div>
+                <h3>Privacy First</h3>
+                <p>All QR codes are generated in your browser. No data is sent to our servers. Your information stays private.</p>
+            </article>
+            
+            <article class="feature-card">
+                <div class="feature-icon">
+                    <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M5 12.55a11 11 0 0114.08 0M1.42 9a16 16 0 0121.16 0M8.53 16.11a6 6 0 016.95 0M12 20h.01"/></svg>
+                </div>
+                <h3>Multiple QR Types</h3>
+                <p>Create QR codes for URLs, text, WiFi, WhatsApp, UPI payments, email, and vCard contacts.</p>
+            </article>
+        </div>
+    </section>
+
+    <!-- How to Use Section -->
+    <section class="content-section" id="how-to-use">
+        <h2 class="section-title">How to Create a QR Code</h2>
+        <p class="section-subtitle">Generate your custom QR code in just 3 simple steps</p>
+        
+        <div class="steps-container">
+            <div class="step-item">
+                <div class="step-number">1</div>
+                <div class="step-content">
+                    <h3>Select QR Code Type</h3>
+                    <p>Choose what type of QR code you want to create - URL, Text, WiFi, WhatsApp, UPI Payment, Email, or Contact Card. Each type is optimized for its specific use case.</p>
+                </div>
+            </div>
+            
+            <div class="step-item">
+                <div class="step-number">2</div>
+                <div class="step-content">
+                    <h3>Enter Your Information</h3>
+                    <p>Fill in the required details in the form. For URLs, enter your website link. For WiFi, enter your network name and password. The form adapts based on the QR type you selected.</p>
+                </div>
+            </div>
+            
+            <div class="step-item">
+                <div class="step-number">3</div>
+                <div class="step-content">
+                    <h3>Customize & Download</h3>
+                    <p>Personalize your QR code with custom colors, add your logo, choose between square or dot style, and adjust the size. Click Generate and download your high-resolution QR code as PNG.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section class="content-section" id="faq">
+        <h2 class="section-title">Frequently Asked Questions</h2>
+        <p class="section-subtitle">Everything you need to know about our QR Code Generator</p>
+        
+        <div class="faq-container">
+            <div class="faq-item">
+                <button class="faq-question">
+                    Is this QR Code Generator completely free?
+                    <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M19 9l-7 7-7-7"/></svg>
+                </button>
+                <div class="faq-answer">
+                    <div class="faq-answer-inner">
+                        Yes! Our QR Code Generator is 100% free with unlimited QR codes, no watermarks, and no signup required. You can create as many QR codes as you want without any cost. There are no premium plans or hidden charges.
+                    </div>
+                </div>
+            </div>
+            
+            <div class="faq-item">
+                <button class="faq-question">
+                    Can I add my logo to the QR code?
+                    <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M19 9l-7 7-7-7"/></svg>
+                </button>
+                <div class="faq-answer">
+                    <div class="faq-answer-inner">
+                        Yes, you can upload your custom logo and it will be placed in the center of the QR code. The QR code uses high error correction (Level H) to ensure it remains scannable even with a logo covering up to 30% of the code.
+                    </div>
+                </div>
+            </div>
+            
+            <div class="faq-item">
+                <button class="faq-question">
+                    What types of QR codes can I create?
+                    <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M19 9l-7 7-7-7"/></svg>
+                </button>
+                <div class="faq-answer">
+                    <div class="faq-answer-inner">
+                        You can create 7 types of QR codes: Plain Text for any message, Website URLs for links, Email for quick email composition, WhatsApp for direct chat links, UPI for payment QR codes, WiFi for network sharing, and vCard for contact information.
+                    </div>
+                </div>
+            </div>
+            
+            <div class="faq-item">
+                <button class="faq-question">
+                    Are the QR codes scannable on all devices?
+                    <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M19 9l-7 7-7-7"/></svg>
+                </button>
+                <div class="faq-answer">
+                    <div class="faq-answer-inner">
+                        Yes, all QR codes generated are fully compatible and scannable on any smartphone camera or QR scanner app. We use high error correction level for maximum compatibility across all devices including iPhone, Android, and tablets.
+                    </div>
+                </div>
+            </div>
+            
+            <div class="faq-item">
+                <button class="faq-question">
+                    Can I customize the colors of my QR code?
+                    <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M19 9l-7 7-7-7"/></svg>
+                </button>
+                <div class="faq-answer">
+                    <div class="faq-answer-inner">
+                        Yes! You can customize both the QR code color and background color. Choose from preset colors or use the color picker for any custom color you want. Just make sure there's enough contrast between the QR code and background for reliable scanning.
+                    </div>
+                </div>
+            </div>
+            
+            <div class="faq-item">
+                <button class="faq-question">
+                    What is the difference between Squares and Dots style?
+                    <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M19 9l-7 7-7-7"/></svg>
+                </button>
+                <div class="faq-answer">
+                    <div class="faq-answer-inner">
+                        Squares is the classic QR code style with square modules, which is traditional and universally recognized. Dots style replaces the squares with rounded circles, giving a more modern and softer look. Both styles are equally scannable.
+                    </div>
+                </div>
+            </div>
+            
+            <div class="faq-item">
+                <button class="faq-question">
+                    Is my data safe and private?
+                    <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M19 9l-7 7-7-7"/></svg>
+                </button>
+                <div class="faq-answer">
+                    <div class="faq-answer-inner">
+                        Absolutely! All QR code generation happens entirely in your browser using JavaScript. No data is sent to any server. Your URLs, WiFi passwords, contact details, and other information never leave your device, ensuring complete privacy.
+                    </div>
+                </div>
+            </div>
+            
+            <div class="faq-item">
+                <button class="faq-question">
+                    What resolution are the downloaded QR codes?
+                    <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M19 9l-7 7-7-7"/></svg>
+                </button>
+                <div class="faq-answer">
+                    <div class="faq-answer-inner">
+                        QR codes are downloaded as high-resolution PNG images. You can adjust the size from 150px to 400px using the size slider. The downloaded image maintains crisp quality suitable for printing on business cards, posters, flyers, and other marketing materials.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="content-section" id="about">
+        <h2 class="section-title">About QR Code Generator</h2>
+        
+        <div class="about-content">
+            <h3>What is a QR Code?</h3>
+            <p>A QR (Quick Response) Code is a two-dimensional barcode that can store various types of information such as URLs, text, contact details, WiFi credentials, and more. When scanned with a smartphone camera or QR scanner app, the encoded information is instantly decoded and the appropriate action is triggered - opening a website, connecting to WiFi, saving a contact, or displaying text.</p>
+            
+            <h3>Why Use QR Codes?</h3>
+            <p>QR codes have become essential in today's digital world. They bridge the gap between offline and online experiences, making it easy to share information without typing. Businesses use QR codes on business cards, product packaging, restaurant menus, marketing materials, and event tickets. Individuals use them to share WiFi passwords, contact information, and social media profiles.</p>
+            
+            <h3>About EasyWebTools QR Generator</h3>
+            <p>Our free QR Code Generator is built with simplicity and functionality in mind. Unlike other tools that require registration or add watermarks, we provide a completely free, unlimited, and privacy-focused solution. All QR codes are generated locally in your browser, meaning your data never touches our servers. Whether you need a simple URL QR code or a branded QR with custom colors and logo, our tool has you covered.</p>
+        </div>
+    </section>
 
     <!-- Footer -->
     <footer class="footer">
@@ -809,7 +1298,7 @@
                 Custom Logo
             </span>
         </div>
-        <p>Made with <svg width="16" height="16" fill="#ef4444" viewBox="0 0 24 24" style="vertical-align: middle;"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg> | Free QR Code Generator</p>
+        <p>Made by <a href="https://easywebtools.in" style="color: var(--primary); text-decoration: none;">EasyWebTools</a></p>
     </footer>
 
     <script>
@@ -820,6 +1309,7 @@
         let qrSize = 256;
         let qrStyle = 'squares';
         let logoData = null;
+        let logoImage = null;
         let qrGenerated = false;
         let qrInstance = null;
 
@@ -885,19 +1375,19 @@
             return value;
         }
 
-        // Draw QR Code
+        // Generate QR Code
         function drawQR() {
             const value = getQRValue();
             if (!value) return;
             
             qrGenerated = true;
             
-            // Clear previous QR
-            const container = $('qrContainer');
-            container.innerHTML = '';
+            // Clear hidden container
+            const hidden = $('qrHidden');
+            hidden.innerHTML = '';
             
-            // Create new QR using library
-            qrInstance = new QRCode(container, {
+            // Generate QR using library
+            qrInstance = new QRCode(hidden, {
                 text: value,
                 width: qrSize,
                 height: qrSize,
@@ -906,115 +1396,209 @@
                 correctLevel: QRCode.CorrectLevel.H
             });
             
-            // Wait for QR to be generated, then apply style and logo
+            // Wait for QR generation then render
             setTimeout(() => {
-                applyStyleAndLogo();
-            }, 100);
-
-            // Show container
-            $('placeholder').style.display = 'none';
-            container.style.display = 'block';
-            $('qrBox').classList.add('has-qr');
-            $('downloadBtn').style.display = 'flex';
+                renderCustomQR();
+            }, 150);
         }
         
-        // Apply dots style and logo
-        function applyStyleAndLogo() {
-            const container = $('qrContainer');
-            const img = container.querySelector('img');
-            const canvas = container.querySelector('canvas');
+        // Render QR with dots style and logo
+        function renderCustomQR() {
+            const hidden = $('qrHidden');
+            const sourceImg = hidden.querySelector('img');
+            const sourceCanvas = hidden.querySelector('canvas');
             
-            // Use canvas if available, otherwise use image
-            const sourceCanvas = canvas || createCanvasFromImage(img);
-            if (!sourceCanvas) return;
+            const canvas = $('qrCanvas');
+            const ctx = canvas.getContext('2d');
             
-            const ctx = sourceCanvas.getContext('2d');
-            const size = sourceCanvas.width;
-            
-            // If dots style, redraw with circles
-            if (qrStyle === 'dots') {
-                const imageData = ctx.getImageData(0, 0, size, size);
-                const data = imageData.data;
-                
-                // Clear and redraw background
-                ctx.fillStyle = bgColor;
-                ctx.fillRect(0, 0, size, size);
-                
-                // Detect module size (find the smallest black square)
-                let moduleSize = 1;
-                for (let i = 1; i < size; i++) {
-                    const idx = i * 4;
-                    if (data[idx] > 128) { // Found white pixel
-                        moduleSize = i;
-                        break;
-                    }
+            // For squares mode without logo - just copy the library output
+            if (qrStyle === 'squares' && !logoImage) {
+                if (sourceCanvas) {
+                    canvas.width = sourceCanvas.width;
+                    canvas.height = sourceCanvas.height;
+                    ctx.drawImage(sourceCanvas, 0, 0);
+                } else if (sourceImg && sourceImg.complete) {
+                    canvas.width = qrSize;
+                    canvas.height = qrSize;
+                    ctx.drawImage(sourceImg, 0, 0, qrSize, qrSize);
+                } else if (sourceImg) {
+                    sourceImg.onload = function() {
+                        canvas.width = qrSize;
+                        canvas.height = qrSize;
+                        ctx.drawImage(sourceImg, 0, 0, qrSize, qrSize);
+                        showQR();
+                    };
+                    return;
                 }
-                if (moduleSize < 4) moduleSize = Math.floor(size / 25); // Fallback
+                showQR();
+                return;
+            }
+            
+            // For squares mode with logo - copy and add logo
+            if (qrStyle === 'squares' && logoImage) {
+                canvas.width = qrSize;
+                canvas.height = qrSize;
                 
-                // Draw dots
-                ctx.fillStyle = qrColor;
-                for (let y = 0; y < size; y += moduleSize) {
-                    for (let x = 0; x < size; x += moduleSize) {
-                        // Check if this module should be dark
-                        const idx = (y * size + x) * 4;
-                        if (data[idx] < 128) { // Dark pixel
-                            ctx.beginPath();
-                            ctx.arc(
-                                x + moduleSize / 2,
-                                y + moduleSize / 2,
-                                moduleSize * 0.4,
-                                0,
-                                Math.PI * 2
-                            );
-                            ctx.fill();
-                        }
+                if (sourceCanvas) {
+                    ctx.drawImage(sourceCanvas, 0, 0, qrSize, qrSize);
+                } else if (sourceImg) {
+                    ctx.drawImage(sourceImg, 0, 0, qrSize, qrSize);
+                }
+                
+                // Add logo
+                addLogoToCanvas(ctx, qrSize);
+                showQR();
+                return;
+            }
+            
+            // For dots mode - need to re-render
+            // Get the actual QR data from library's canvas
+            let srcCanvas = sourceCanvas;
+            if (!srcCanvas && sourceImg) {
+                srcCanvas = document.createElement('canvas');
+                const w = sourceImg.naturalWidth || sourceImg.width || qrSize;
+                srcCanvas.width = w;
+                srcCanvas.height = w;
+                const tmpCtx = srcCanvas.getContext('2d');
+                tmpCtx.drawImage(sourceImg, 0, 0, w, w);
+            }
+            
+            if (!srcCanvas) return;
+            
+            const srcWidth = srcCanvas.width;
+            const srcCtx = srcCanvas.getContext('2d');
+            const srcData = srcCtx.getImageData(0, 0, srcWidth, srcWidth).data;
+            
+            // QRCode.js generates QR with no margin, directly on canvas
+            // Module size = canvas width / number of modules
+            // We need to detect number of modules by finding the finder pattern
+            
+            // Count consecutive dark pixels from start (first row of finder = 7 dark modules)
+            let darkCount = 0;
+            for (let x = 0; x < srcWidth; x++) {
+                if (srcData[x * 4] < 128) {
+                    darkCount++;
+                } else {
+                    break;
+                }
+            }
+            
+            // First dark run in finder pattern spans 7 modules
+            // So moduleSize = darkCount / 7
+            let moduleSize = Math.round(darkCount / 7);
+            if (moduleSize < 1) moduleSize = 1;
+            
+            let modules = Math.round(srcWidth / moduleSize);
+            
+            // QR code versions: v1=21, v2=25, v3=29... (4n+17)
+            // Round to nearest valid QR size
+            const validSizes = [];
+            for (let v = 1; v <= 40; v++) validSizes.push(4 * v + 17);
+            
+            let closestSize = validSizes.reduce((prev, curr) => 
+                Math.abs(curr - modules) < Math.abs(prev - modules) ? curr : prev
+            );
+            
+            modules = closestSize;
+            moduleSize = srcWidth / modules;
+            
+            // Setup output canvas
+            canvas.width = qrSize;
+            canvas.height = qrSize;
+            ctx.fillStyle = bgColor;
+            ctx.fillRect(0, 0, qrSize, qrSize);
+            
+            const outSize = qrSize / modules;
+            ctx.fillStyle = qrColor;
+            
+            // Build module matrix first
+            const matrix = [];
+            for (let row = 0; row < modules; row++) {
+                matrix[row] = [];
+                for (let col = 0; col < modules; col++) {
+                    const sx = Math.floor((col + 0.5) * moduleSize);
+                    const sy = Math.floor((row + 0.5) * moduleSize);
+                    const idx = (Math.min(sy, srcWidth-1) * srcWidth + Math.min(sx, srcWidth-1)) * 4;
+                    matrix[row][col] = srcData[idx] < 128;
+                }
+            }
+            
+            // Draw modules
+            for (let row = 0; row < modules; row++) {
+                for (let col = 0; col < modules; col++) {
+                    if (!matrix[row][col]) continue;
+                    
+                    const x = col * outSize;
+                    const y = row * outSize;
+                    
+                    // Finder patterns: 7x7 squares at corners + 1 separator
+                    const inTopLeft = row < 7 && col < 7;
+                    const inTopRight = row < 7 && col >= modules - 7;
+                    const inBottomLeft = row >= modules - 7 && col < 7;
+                    
+                    // Timing patterns: row 6 and col 6 (between finders)
+                    const inTimingH = row === 6 && col >= 7 && col < modules - 7;
+                    const inTimingV = col === 6 && row >= 7 && row < modules - 7;
+                    
+                    // Alignment patterns (for version >= 2) - small 5x5 squares
+                    // Keep these as squares too for better scanning
+                    
+                    const keepSquare = inTopLeft || inTopRight || inBottomLeft || inTimingH || inTimingV;
+                    
+                    if (keepSquare) {
+                        // Draw as square
+                        ctx.fillRect(x, y, outSize + 0.5, outSize + 0.5);
+                    } else {
+                        // Draw as rounded square (better than circle for scanning)
+                        const radius = outSize * 0.3;
+                        const size = outSize * 0.95;
+                        const offset = (outSize - size) / 2;
+                        
+                        ctx.beginPath();
+                        ctx.moveTo(x + offset + radius, y + offset);
+                        ctx.lineTo(x + offset + size - radius, y + offset);
+                        ctx.quadraticCurveTo(x + offset + size, y + offset, x + offset + size, y + offset + radius);
+                        ctx.lineTo(x + offset + size, y + offset + size - radius);
+                        ctx.quadraticCurveTo(x + offset + size, y + offset + size, x + offset + size - radius, y + offset + size);
+                        ctx.lineTo(x + offset + radius, y + offset + size);
+                        ctx.quadraticCurveTo(x + offset, y + offset + size, x + offset, y + offset + size - radius);
+                        ctx.lineTo(x + offset, y + offset + radius);
+                        ctx.quadraticCurveTo(x + offset, y + offset, x + offset + radius, y + offset);
+                        ctx.closePath();
+                        ctx.fill();
                     }
                 }
             }
             
             // Add logo if present
-            if (logoData) {
-                const logoImg = new Image();
-                logoImg.onload = () => {
-                    const logoSize = size * 0.22;
-                    const logoX = (size - logoSize) / 2;
-                    const logoY = (size - logoSize) / 2;
-                    
-                    // White background for logo
-                    ctx.fillStyle = bgColor;
-                    const padding = 8;
-                    ctx.beginPath();
-                    ctx.roundRect(logoX - padding, logoY - padding, logoSize + padding*2, logoSize + padding*2, 8);
-                    ctx.fill();
-                    
-                    ctx.drawImage(logoImg, logoX, logoY, logoSize, logoSize);
-                    
-                    // Update the display
-                    updateDisplay(sourceCanvas);
-                };
-                logoImg.src = logoData;
-            } else if (qrStyle === 'dots') {
-                updateDisplay(sourceCanvas);
+            if (logoImage) {
+                addLogoToCanvas(ctx, qrSize);
             }
+            
+            showQR();
         }
         
-        function createCanvasFromImage(img) {
-            if (!img) return null;
-            const canvas = document.createElement('canvas');
-            canvas.width = img.width || qrSize;
-            canvas.height = img.height || qrSize;
-            const ctx = canvas.getContext('2d');
-            ctx.drawImage(img, 0, 0);
-            return canvas;
+        // Add logo to canvas
+        function addLogoToCanvas(ctx, size) {
+            const logoSize = size * 0.2;
+            const logoX = (size - logoSize) / 2;
+            const logoY = (size - logoSize) / 2;
+            const padding = 6;
+            
+            // White background
+            ctx.fillStyle = bgColor;
+            ctx.fillRect(logoX - padding, logoY - padding, logoSize + padding * 2, logoSize + padding * 2);
+            
+            // Draw logo
+            ctx.drawImage(logoImage, logoX, logoY, logoSize, logoSize);
         }
         
-        function updateDisplay(canvas) {
-            const container = $('qrContainer');
-            container.innerHTML = '';
-            canvas.style.borderRadius = '8px';
-            canvas.style.maxWidth = '100%';
-            canvas.style.height = 'auto';
-            container.appendChild(canvas);
+        // Show QR code
+        function showQR() {
+            $('placeholder').style.display = 'none';
+            $('qrCanvas').style.display = 'block';
+            $('qrBox').classList.add('has-qr');
+            $('downloadBtn').style.display = 'flex';
         }
 
         // Update QR (only if already generated)
@@ -1048,7 +1632,7 @@
                 });
             });
 
-            // QR Colors - Instant update
+            // QR Colors
             $$('#qrColors .color-dot').forEach(dot => {
                 dot.addEventListener('click', () => {
                     $$('#qrColors .color-dot').forEach(d => d.classList.remove('active'));
@@ -1059,7 +1643,7 @@
                 });
             });
 
-            // BG Colors - Instant update
+            // BG Colors
             $$('#bgColors .color-dot').forEach(dot => {
                 dot.addEventListener('click', () => {
                     $$('#bgColors .color-dot').forEach(d => d.classList.remove('active'));
@@ -1070,21 +1654,21 @@
                 });
             });
 
-            // QR Color Picker - Instant update
+            // QR Color Picker
             $('qrColorPicker').addEventListener('input', e => {
                 qrColor = e.target.value;
                 $$('#qrColors .color-dot').forEach(d => d.classList.remove('active'));
                 updateQR();
             });
 
-            // BG Color Picker - Instant update
+            // BG Color Picker
             $('bgColorPicker').addEventListener('input', e => {
                 bgColor = e.target.value;
                 $$('#bgColors .color-dot').forEach(d => d.classList.remove('active'));
                 updateQR();
             });
 
-            // Style toggle - Instant update
+            // Style toggle
             $$('.style-btn').forEach(btn => {
                 btn.addEventListener('click', () => {
                     $$('.style-btn').forEach(b => b.classList.remove('active'));
@@ -1094,36 +1678,46 @@
                 });
             });
 
-            // Size slider - Instant update
+            // Size slider
             $('sizeSlider').addEventListener('input', e => {
                 qrSize = parseInt(e.target.value);
                 $('sizeValue').textContent = qrSize + 'px';
                 updateQR();
             });
 
-            // Logo upload - Instant update
+            // Logo upload
             $('logoInput').addEventListener('change', e => {
                 const file = e.target.files[0];
                 if (file) {
                     const reader = new FileReader();
                     reader.onload = ev => {
                         logoData = ev.target.result;
-                        $('logoImg').src = logoData;
-                        $('logoName').textContent = file.name;
-                        $('uploadText').style.display = 'none';
-                        $('logoPreview').style.display = 'flex';
-                        $('logoUpload').classList.add('has-logo');
-                        updateQR();
+                        
+                        // Create image object for drawing
+                        logoImage = new Image();
+                        logoImage.onload = () => {
+                            // Update UI
+                            $('logoImg').src = logoData;
+                            $('logoName').textContent = file.name;
+                            $('uploadText').style.display = 'none';
+                            $('logoPreview').style.display = 'flex';
+                            $('logoUpload').classList.add('has-logo');
+                            
+                            // Update QR if already generated
+                            updateQR();
+                        };
+                        logoImage.src = logoData;
                     };
                     reader.readAsDataURL(file);
                 }
             });
 
-            // Logo remove - Instant update
+            // Logo remove
             $('logoRemove').addEventListener('click', e => {
                 e.preventDefault();
                 e.stopPropagation();
                 logoData = null;
+                logoImage = null;
                 $('logoInput').value = '';
                 $('uploadText').style.display = 'flex';
                 $('logoPreview').style.display = 'none';
@@ -1145,14 +1739,15 @@
             $('resetBtn').addEventListener('click', () => {
                 $$('.qr-input').forEach(i => i.value = '');
                 $('placeholder').style.display = 'block';
-                $('qrContainer').style.display = 'none';
-                $('qrContainer').innerHTML = '';
+                $('qrCanvas').style.display = 'none';
+                $('qrHidden').innerHTML = '';
                 $('qrBox').classList.remove('has-qr');
                 $('downloadBtn').style.display = 'none';
                 qrGenerated = false;
                 
                 // Reset logo
                 logoData = null;
+                logoImage = null;
                 $('logoInput').value = '';
                 $('uploadText').style.display = 'flex';
                 $('logoPreview').style.display = 'none';
@@ -1161,29 +1756,30 @@
 
             // Download
             $('downloadBtn').addEventListener('click', () => {
-                const container = $('qrContainer');
-                const canvas = container.querySelector('canvas');
-                const img = container.querySelector('img');
-                
-                let dataUrl;
+                const canvas = $('qrCanvas');
                 if (canvas) {
-                    dataUrl = canvas.toDataURL('image/png');
-                } else if (img) {
-                    // Convert image to canvas for download
-                    const tempCanvas = document.createElement('canvas');
-                    tempCanvas.width = img.naturalWidth || qrSize;
-                    tempCanvas.height = img.naturalHeight || qrSize;
-                    const ctx = tempCanvas.getContext('2d');
-                    ctx.drawImage(img, 0, 0);
-                    dataUrl = tempCanvas.toDataURL('image/png');
-                }
-                
-                if (dataUrl) {
+                    const dataUrl = canvas.toDataURL('image/png');
                     const link = document.createElement('a');
                     link.download = 'qr-' + currentType + '-' + Date.now() + '.png';
                     link.href = dataUrl;
                     link.click();
                 }
+            });
+
+            // FAQ Toggle
+            $$('.faq-question').forEach(btn => {
+                btn.addEventListener('click', () => {
+                    const item = btn.parentElement;
+                    const isActive = item.classList.contains('active');
+                    
+                    // Close all
+                    $$('.faq-item').forEach(i => i.classList.remove('active'));
+                    
+                    // Open clicked if wasn't active
+                    if (!isActive) {
+                        item.classList.add('active');
+                    }
+                });
             });
         });
     </script>
