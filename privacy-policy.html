@@ -2,10 +2,27 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Privacy Policy | Easy Web Tools</title>
+<title>Privacy Policy – Easy Web Tools | How We Protect Your Data</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="Easy Web Tools Privacy Policy – Your data privacy, security, and trust matters to us.">
-<link rel="alternate" href="https://easywebtools.in/" hreflang="en-in" />
+<meta name="description" content="Easy Web Tools Privacy Policy – Learn how we collect, use, and protect your personal data. We process files in-browser for maximum privacy. Last updated January 2025.">
+<meta name="keywords" content="Easy Web Tools privacy policy, data protection, browser-based tools, cookie policy, easywebtools.in privacy">
+<meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large">
+<link rel="canonical" href="https://easywebtools.in/privacy-policy" />
+<link rel="alternate" href="https://easywebtools.in/privacy-policy" hreflang="en-in" />
+
+<!-- Open Graph -->
+<meta property="og:title" content="Privacy Policy – Easy Web Tools">
+<meta property="og:description" content="Learn how Easy Web Tools collects, uses, and protects your data. We process files in-browser for maximum privacy and security.">
+<meta property="og:url" content="https://easywebtools.in/privacy-policy">
+<meta property="og:site_name" content="Easy Web Tools">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="en_IN">
+
+<!-- Twitter Card -->
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Privacy Policy – Easy Web Tools">
+<meta name="twitter:description" content="Learn how Easy Web Tools collects, uses, and protects your data. Browser-based processing for maximum privacy.">
+
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   
@@ -13,6 +30,50 @@
 <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
 <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
 <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Satoshi:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<!-- Structured Data: WebPage + BreadcrumbList -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebPage",
+  "name": "Privacy Policy – Easy Web Tools",
+  "description": "Easy Web Tools Privacy Policy explains how we collect, use, and protect your personal information when you use our free online tools.",
+  "url": "https://easywebtools.in/privacy-policy",
+  "dateModified": "2025-01-01",
+  "inLanguage": "en",
+  "isPartOf": {
+    "@type": "WebSite",
+    "name": "Easy Web Tools",
+    "url": "https://easywebtools.in"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Easy Web Tools",
+    "url": "https://easywebtools.in"
+  }
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Home",
+      "item": "https://easywebtools.in"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "Privacy Policy",
+      "item": "https://easywebtools.in/privacy-policy"
+    }
+  ]
+}
+</script>
+
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
 
@@ -243,10 +304,22 @@ body::before{
 }
 .hero-meta svg{opacity:.5}
 
+/* ─── BREADCRUMB ─── */
+.breadcrumb{
+  position:relative;z-index:1;
+  max-width:820px;margin:20px auto 0;
+  padding:0 24px;
+  font-size:13px;
+  color:var(--gray-500);
+}
+.breadcrumb a{color:var(--gray-500);text-decoration:none;transition:color 0.2s}
+.breadcrumb a:hover{color:var(--primary)}
+.breadcrumb span{margin:0 6px;opacity:.4}
+
 /* ─── CONTENT ─── */
 .content-wrap{
   position:relative;z-index:1;
-  max-width:820px;margin:-36px auto 0;
+  max-width:820px;margin:16px auto 0;
   padding:0 24px 80px;
 }
 
@@ -488,11 +561,11 @@ body::before{
 <body>
 
 <!-- NAV -->
-<nav class="navbar" id="navbar">
+<nav class="navbar" id="navbar" aria-label="Main Navigation">
   <div class="nav-inner">
-    <a href="https://easywebtools.in/" class="logo">
+    <a href="https://easywebtools.in/" class="logo" aria-label="Easy Web Tools Home">
       <div class="logo-mark">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
           <path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/>
         </svg>
       </div>
@@ -504,15 +577,15 @@ body::before{
       <li><a href="https://easywebtools.in/invoice-generator">Invoice Generator</a></li>
       <li><a href="https://easywebtools.in/video-downloader">Video Downloader</a></li>
       <li><a href="https://easywebtools.in" class="nav-cta-link">
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
         Get Started
       </a></li>
     </ul>
-    <button class="mobile-toggle" id="mobileToggle"><span></span><span></span><span></span></button>
+    <button class="mobile-toggle" id="mobileToggle" aria-label="Toggle Menu"><span></span><span></span><span></span></button>
   </div>
 </nav>
 
-<div class="mobile-nav" id="mobileNav">
+<div class="mobile-nav" id="mobileNav" aria-label="Mobile Navigation">
   <ul>
     <li><a href="https://easywebtools.in/pdf-editor">PDF Tools</a></li>
     <li><a href="https://easywebtools.in/qr-generator">QR Generator</a></li>
@@ -523,131 +596,140 @@ body::before{
 </div>
 
 <!-- HERO -->
-<section class="hero">
+<header class="hero">
   <div class="hero-shape hero-shape-1"></div>
   <div class="hero-shape hero-shape-2"></div>
   <div class="hero-shape hero-shape-3"></div>
   <div class="hero-content">
     <div class="hero-badge"><span class="hero-badge-dot"></span>Your data stays yours</div>
     <h1>Privacy <em>Policy</em></h1>
-    <p class="hero-sub">Easy Web Tools is built with transparency, security, and trust at its core. Here's exactly how we handle your information.</p>
+    <p class="hero-sub">Easy Web Tools is built with transparency, security, and trust at its core. Here's exactly how we handle your information when you use our free online PDF editor, QR code generator, invoice maker, and video downloader.</p>
     <div class="hero-meta">
-      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
       Last updated · January 2025
     </div>
   </div>
-</section>
+</header>
+
+<!-- BREADCRUMB -->
+<nav class="breadcrumb" aria-label="Breadcrumb">
+  <a href="https://easywebtools.in/">Home</a><span>›</span><strong>Privacy Policy</strong>
+</nav>
 
 <!-- CONTENT -->
-<div class="content-wrap">
-  <div class="policy-card">
+<main class="content-wrap">
+  <article class="policy-card">
 
-    <div class="toc">
+    <nav class="toc" aria-label="Table of Contents">
       <div class="toc-label">Quick Navigation</div>
       <div class="toc-grid">
-        <a href="#s1" class="toc-link"><span class="toc-num">1</span> Introduction</a>
-        <a href="#s2" class="toc-link"><span class="toc-num">2</span> What We Collect</a>
-        <a href="#s3" class="toc-link"><span class="toc-num">3</span> How We Use Data</a>
-        <a href="#s4" class="toc-link"><span class="toc-num">4</span> Third-Party Services</a>
-        <a href="#s5" class="toc-link"><span class="toc-num">5</span> Data Security</a>
-        <a href="#s6" class="toc-link"><span class="toc-num">6</span> Children's Privacy</a>
-        <a href="#s7" class="toc-link"><span class="toc-num">7</span> Your Consent</a>
-        <a href="#s8" class="toc-link"><span class="toc-num">8</span> Contact Us</a>
+        <a href="#introduction" class="toc-link"><span class="toc-num">1</span> Introduction</a>
+        <a href="#information-we-collect" class="toc-link"><span class="toc-num">2</span> What We Collect</a>
+        <a href="#how-we-use-your-data" class="toc-link"><span class="toc-num">3</span> How We Use Data</a>
+        <a href="#third-party-services" class="toc-link"><span class="toc-num">4</span> Third-Party Services</a>
+        <a href="#data-security" class="toc-link"><span class="toc-num">5</span> Data Security</a>
+        <a href="#childrens-privacy" class="toc-link"><span class="toc-num">6</span> Children's Privacy</a>
+        <a href="#your-consent" class="toc-link"><span class="toc-num">7</span> Your Consent</a>
+        <a href="#contact-us" class="toc-link"><span class="toc-num">8</span> Contact Us</a>
       </div>
-    </div>
+    </nav>
 
     <div class="policy-body">
 
-      <div class="section reveal" id="s1">
+      <section class="section reveal" id="introduction">
         <div class="section-tag">Section 01</div>
         <h2>Introduction</h2>
-        <p>Welcome to <strong>Easy Web Tools</strong> (<a href="https://easywebtools.in">easywebtools.in</a>). This Privacy Policy explains how we collect, use, and protect your information while you use our online tools and services.</p>
-        <p>We believe in keeping things simple and transparent. Our goal is to provide you with powerful, free web tools while respecting your privacy at every step.</p>
-      </div>
+        <p>Welcome to <strong>Easy Web Tools</strong> (<a href="https://easywebtools.in">easywebtools.in</a>). This Privacy Policy explains how we collect, use, and protect your information while you use our free online tools and services, including our PDF editor, QR code generator, invoice generator, and video downloader.</p>
+        <p>At Easy Web Tools, we believe in keeping things simple and transparent. Our mission is to provide you with powerful, completely free web-based tools while respecting your privacy at every step. Most of our tools process data directly in your browser, which means your files and sensitive information typically never leave your device.</p>
+      </section>
 
-      <div class="section reveal" id="s2">
+      <section class="section reveal" id="information-we-collect">
         <div class="section-tag">Section 02</div>
         <h2>What Information We Collect</h2>
-        <p>We only collect the minimum information necessary to deliver a great experience:</p>
+        <p>We are committed to collecting only the minimum amount of information necessary to deliver a smooth and reliable experience across all our tools:</p>
         <div class="info-grid">
           <div class="info-card c1">
-            <div class="info-card-emoji">📊</div>
-            <h3>Usage Data</h3>
-            <p>Browser type, device info, pages visited, and interaction patterns to improve performance.</p>
+            <div class="info-card-emoji" aria-hidden="true">📊</div>
+            <h3>Usage &amp; Analytics Data</h3>
+            <p>We collect anonymous usage data such as browser type, device information, pages visited, and general interaction patterns. This helps us understand which tools are most popular and where we can improve performance.</p>
           </div>
           <div class="info-card c2">
-            <div class="info-card-emoji">🧠</div>
-            <h3>Tool Inputs</h3>
-            <p>Data you enter into tools is processed in real-time and not stored permanently on servers.</p>
+            <div class="info-card-emoji" aria-hidden="true">🧠</div>
+            <h3>Tool Inputs &amp; File Data</h3>
+            <p>When you use tools like our PDF editor or QR generator, your data is processed in real-time within your browser. We do not permanently store your files, documents, or tool inputs on our servers.</p>
           </div>
           <div class="info-card c3">
-            <div class="info-card-emoji">🍪</div>
-            <h3>Cookies</h3>
-            <p>Used for analytics, preferences, and a smoother user experience.</p>
+            <div class="info-card-emoji" aria-hidden="true">🍪</div>
+            <h3>Cookies &amp; Local Storage</h3>
+            <p>We use cookies and similar technologies for analytics tracking, saving your preferences, and providing a smoother browsing experience across sessions.</p>
           </div>
         </div>
-      </div>
+      </section>
 
-      <div class="section reveal" id="s3">
+      <section class="section reveal" id="how-we-use-your-data">
         <div class="section-tag">Section 03</div>
         <h2>How We Use Your Data</h2>
-        <p>Your data helps us make Easy Web Tools better for everyone:</p>
+        <p>The limited data we collect is used solely to improve Easy Web Tools and provide you with a better experience. Here is how we use your information:</p>
         <ul class="styled-list">
-          <li><span class="li-icon i1">⚡</span><span>To provide fast, reliable, and free web tools that work seamlessly across all devices</span></li>
-          <li><span class="li-icon i2">🎨</span><span>To improve website speed, UI design, and introduce new features based on usage patterns</span></li>
-          <li><span class="li-icon i3">📈</span><span>To analyze trends, identify bugs, and fix technical issues before they impact your experience</span></li>
-          <li><span class="li-icon i4">🛡️</span><span>To ensure platform security, prevent misuse, and protect all users from potential threats</span></li>
+          <li><span class="li-icon i1" aria-hidden="true">⚡</span><span><strong>Service Delivery:</strong> To provide fast, reliable, and free web tools — including our PDF editor, QR code generator, invoice maker, and video downloader — that work seamlessly across desktop and mobile devices.</span></li>
+          <li><span class="li-icon i2" aria-hidden="true">🎨</span><span><strong>Product Improvement:</strong> To improve website loading speed, refine our user interface design, and develop new features based on how our tools are actually being used by real visitors.</span></li>
+          <li><span class="li-icon i3" aria-hidden="true">📈</span><span><strong>Analytics &amp; Debugging:</strong> To analyze usage trends, identify software bugs, and resolve technical issues proactively before they affect your experience with our tools.</span></li>
+          <li><span class="li-icon i4" aria-hidden="true">🛡️</span><span><strong>Security &amp; Protection:</strong> To ensure platform security, detect and prevent misuse or abuse, and protect all Easy Web Tools users from potential security threats.</span></li>
         </ul>
-      </div>
+      </section>
 
-      <div class="section reveal" id="s4">
+      <section class="section reveal" id="third-party-services">
         <div class="section-tag">Section 04</div>
         <h2>Third-Party Services</h2>
-        <p>We may use trusted third-party services such as analytics or ads providers. These services may use cookies or similar technologies under their own privacy policies.</p>
+        <p>Easy Web Tools may integrate with trusted third-party services to provide analytics, serve advertisements, and improve overall functionality. These third-party providers may use cookies or similar tracking technologies and operate under their own independent privacy policies.</p>
+        <p>Common third-party services we may use include website analytics platforms (such as Google Analytics) and advertising networks. Each of these services has its own data collection and usage practices.</p>
         <div class="callout">
-          <div class="callout-badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg></div>
-          <p>We carefully vet all third-party integrations and only partner with services that maintain strong privacy standards. You can manage cookie preferences through your browser settings at any time.</p>
+          <div class="callout-badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg></div>
+          <p><strong>Your control matters:</strong> We carefully vet all third-party integrations and only partner with services that maintain strong privacy and data protection standards. You can manage your cookie preferences and opt out of tracking through your browser settings at any time.</p>
         </div>
-      </div>
+      </section>
 
-      <div class="section reveal" id="s5">
+      <section class="section reveal" id="data-security">
         <div class="section-tag">Section 05</div>
         <h2>Data Security</h2>
-        <p>We use industry-standard security practices to protect your information. Our tools process most data directly in your browser — meaning your files and inputs typically never leave your device.</p>
-        <p>However, no method of online transmission is 100% secure. While we strive to use commercially acceptable means to protect your data, we cannot guarantee absolute security.</p>
-      </div>
+        <p>Protecting your data is a top priority at Easy Web Tools. We implement industry-standard security practices including HTTPS encryption across our entire website to safeguard your information during transmission.</p>
+        <p>A key advantage of Easy Web Tools is that most of our tools — such as the PDF editor and QR code generator — process your data directly inside your web browser using client-side JavaScript. This means your files, documents, and sensitive inputs typically never leave your device or get uploaded to our servers.</p>
+        <p>However, please note that no method of electronic transmission or storage over the internet is 100% secure. While we strive to use commercially acceptable and up-to-date methods to protect your data, we cannot guarantee absolute security against all possible threats.</p>
+      </section>
 
-      <div class="section reveal" id="s6">
+      <section class="section reveal" id="childrens-privacy">
         <div class="section-tag">Section 06</div>
         <h2>Children's Privacy</h2>
-        <p>Easy Web Tools does not knowingly collect personal information from children under 13. If you are a parent or guardian and believe your child has provided us with personal data, please contact us immediately so we can take appropriate action.</p>
-      </div>
+        <p>Easy Web Tools does not knowingly collect, store, or process personal information from children under the age of 13. Our tools and services are designed for a general audience and are not directed at children.</p>
+        <p>If you are a parent or legal guardian and believe that your child has provided us with personal data while using Easy Web Tools, please contact us immediately. We will take prompt steps to investigate and delete any such information from our systems.</p>
+      </section>
 
-      <div class="section reveal" id="s7">
+      <section class="section reveal" id="your-consent">
         <div class="section-tag">Section 07</div>
-        <h2>Your Consent</h2>
-        <p>By using our website, you consent to this Privacy Policy and agree to its terms. We may update this policy from time to time, and changes will be reflected on this page with an updated revision date.</p>
-      </div>
+        <h2>Your Consent &amp; Policy Updates</h2>
+        <p>By accessing and using the Easy Web Tools website (<a href="https://easywebtools.in">easywebtools.in</a>), you acknowledge that you have read this Privacy Policy and consent to the data practices described herein.</p>
+        <p>We may update this Privacy Policy from time to time to reflect changes in our practices, technology, legal requirements, or for other operational reasons. When we make changes, we will update the "Last updated" date at the top of this page. We encourage you to review this policy periodically to stay informed about how we protect your information.</p>
+      </section>
 
-      <div class="section reveal" id="s8">
+      <section class="section reveal" id="contact-us">
         <div class="section-tag">Section 08</div>
         <h2>Contact Us</h2>
-        <p>Have questions about this privacy policy or how we handle your data? We'd love to hear from you.</p>
+        <p>Have questions, concerns, or feedback about this Privacy Policy or how Easy Web Tools handles your data? We welcome your inquiries and are happy to provide any additional information you may need.</p>
         <div class="contact-card">
-          <div class="contact-avatar">🌐</div>
+          <div class="contact-avatar" aria-hidden="true">🌐</div>
           <div class="contact-detail">
             <h3>Easy Web Tools</h3>
             <a href="https://easywebtools.in">easywebtools.in</a>
           </div>
         </div>
-      </div>
+      </section>
 
     </div>
-  </div>
-</div>
+  </article>
+</main>
 
 <footer class="site-footer">
-  <p>© 2026 Easy Web Tools<span class="sep">·</span><a href="https://easywebtools.in/">Home</a><span class="sep">·</span><a href="https://easywebtools.in/privacy-policy">Privacy Policy</a></p>
+  <p>© 2025 Easy Web Tools<span class="sep">·</span><a href="https://easywebtools.in/">Home</a><span class="sep">·</span><a href="https://easywebtools.in/privacy-policy">Privacy Policy</a></p>
 </footer>
 
 <script>
@@ -678,6 +760,3 @@ document.querySelectorAll('a[href^="#"]').forEach(a=>{
 </script>
 </body>
 </html>
-
-
-
