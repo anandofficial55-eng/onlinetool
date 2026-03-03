@@ -36,7 +36,7 @@
     <style>
         *{margin:0;padding:0;box-sizing:border-box}
         :root{
-            --primary:#4f46e5;--primary-light:#6366f1;--primary-dark:#4338ca;--primary-bg:rgba(79,70,229,.06);--primary-border:rgba(79,70,229,.15);
+            --primary:#6366f1;--primary-light:#ec4899;--primary-dark:#4338ca;--primary-bg:rgba(79,70,229,.06);--primary-border:rgba(79,70,229,.15);
             --success:#16a34a;--success-bg:rgba(22,163,74,.08);--success-border:rgba(22,163,74,.2);
             --warn:#f59e0b;--err:#ef4444;
             --bg:#ffffff;--bg2:#f8fafc;--bg3:#f1f5f9;
@@ -172,22 +172,24 @@
         .faq-a{max-height:0;overflow:hidden;transition:max-height .3s,padding .3s}
         .faq-item.open .faq-a{max-height:300px;padding:0 18px 14px}.faq-a p{font-size:13px;color:var(--text2);margin-bottom:0}
 
-        /* ===== FOOTER (matching easywebtools.in) ===== */
-        footer{background:var(--text);color:#fff;margin-top:auto}
-        .footer-top{padding:40px 0;display:grid;grid-template-columns:2fr 1fr 1fr 1fr 1fr;gap:24px}
-        .footer-brand p{font-size:13px;color:#94a3b8;margin-top:10px;line-height:1.6}
-        .footer-col h5{font-size:13px;font-weight:700;color:#fff;margin-bottom:12px;text-transform:uppercase;letter-spacing:.5px}
-        .footer-col a{display:block;font-size:13px;color:#94a3b8;text-decoration:none;padding:3px 0;transition:color .2s}
-        .footer-col a:hover{color:#fff}
-        .footer-bottom{border-top:1px solid rgba(255,255,255,.1);padding:20px 0;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px}
-        .footer-bottom p{font-size:12px;color:#64748b}
-        .footer-bottom a{color:#94a3b8;text-decoration:none;font-size:12px;transition:color .2s}
-        .footer-bottom a:hover{color:#fff}
-        .footer-links{display:flex;gap:20px}
 
+         .seo-footer{padding:32px 20px;background:white;border-top:1px solid var(--border);text-align:center}
+        .seo-footer p{font-size:13px;color:var(--text-light)}
+        .seo-footer a{color:var(--primary);text-decoration:none;font-weight:600}
+        .seo-footer a:hover{text-decoration:underline}
+        .logo-icon {
+            width: 44px;
+            height: 44px;
+            background: linear-gradient(135deg,var(--primary),var(--primary-dark));
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 22px;
+            box-shadow: 0 4px 15px rgba(255,107,53,0.3);color:#fff;
+        }
         @media(max-width:768px){
-            .nav-links{display:none}.menu-toggle{display:block}
-            .footer-top{grid-template-columns:1fr 1fr}
+
             .img-grid{grid-template-columns:1fr}
             .action-bar{flex-direction:column}
             .btn-row{width:100%;justify-content:center}
@@ -201,16 +203,9 @@
     <div class="container">
         <nav>
             <a href="https://easywebtools.in" class="logo">
-                <svg viewBox="0 0 32 32" fill="none"><rect width="32" height="32" rx="8" fill="#4f46e5"/><path d="M8 16h16M8 10h16M8 22h10" stroke="#fff" stroke-width="2.5" stroke-linecap="round"/></svg>
-                Easy <span>Web Tools</span>
+              <div class="logo-icon">  <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-polaroid"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M4 6a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v12a2 2 0 0 1 -2 2h-12a2 2 0 0 1 -2 -2l0 -12" /><path d="M4 16l16 0" /><path d="M4 12l3 -3c.928 -.893 2.072 -.893 3 0l4 4" /><path d="M13 12l2 -2c.928 -.893 2.072 -.893 3 0l2 2" /><path d="M14 7l.01 0" /></svg></div>
+                Image  <span>Compressor</span>
             </a>
-            <div class="nav-links">
-                <a href="https://easywebtools.in/#tools">Tools</a>
-                <a href="https://easywebtools.in/#features">Features</a>
-                <a href="https://easywebtools.in/#how-it-works">How It Works</a>
-                <a href="https://easywebtools.in/#faq">FAQ</a>
-                <a href="https://easywebtools.in/#tools" class="btn-nav">Get Started</a>
-            </div>
             <button class="menu-toggle" onclick="document.querySelector('.nav-links').style.display=document.querySelector('.nav-links').style.display==='flex'?'none':'flex'" aria-label="Menu">
                 <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M4 6h16M4 12h16M4 18h16"/></svg>
             </button>
@@ -335,55 +330,8 @@
 </main>
 
 <!-- ===== FOOTER (matching easywebtools.in) ===== -->
-<footer>
-    <div class="container">
-        <div class="footer-top">
-            <div class="footer-brand">
-                <a href="https://easywebtools.in" class="logo" style="color:#fff;font-size:18px;margin-bottom:4px">
-                    <svg width="28" height="28" viewBox="0 0 32 32" fill="none"><rect width="32" height="32" rx="8" fill="#6366f1"/><path d="M8 16h16M8 10h16M8 22h10" stroke="#fff" stroke-width="2.5" stroke-linecap="round"/></svg>
-                    Easy <span style="color:#a5b4fc">Web Tools</span>
-                </a>
-                <p>Free online tools to make your work easier. Edit PDFs, create QR codes, download videos, generate invoices, compress images & more — all without signup.</p>
-            </div>
-            <div class="footer-col">
-                <h5>PDF Tools</h5>
-                <a href="https://easywebtools.in/pdf-editor">Merge PDF</a>
-                <a href="https://easywebtools.in/pdf-editor">Split PDF</a>
-                <a href="https://easywebtools.in/pdf-editor">Compress PDF</a>
-                <a href="https://easywebtools.in/pdf-editor">PDF to Word</a>
-            </div>
-            <div class="footer-col">
-                <h5>QR Codes</h5>
-                <a href="https://easywebtools.in/qr-generator">URL QR Code</a>
-                <a href="https://easywebtools.in/qr-generator">WhatsApp QR</a>
-                <a href="https://easywebtools.in/qr-generator">UPI Payment QR</a>
-                <a href="https://easywebtools.in/qr-generator">WiFi QR Code</a>
-            </div>
-            <div class="footer-col">
-                <h5>Invoice</h5>
-                <a href="https://easywebtools.in/invoice-generator">Create Invoice</a>
-                <a href="https://easywebtools.in/invoice-generator">GST Invoice</a>
-                <a href="https://easywebtools.in/invoice-generator">Invoice Templates</a>
-                <a href="https://easywebtools.in/invoice-generator">Download PDF</a>
-            </div>
-            <div class="footer-col">
-                <h5>Video</h5>
-                <a href="https://easywebtools.in/video-downloader">YouTube Downloader</a>
-                <a href="https://easywebtools.in/video-downloader">Facebook Downloader</a>
-                <a href="https://easywebtools.in/video-downloader">Instagram Downloader</a>
-                <a href="https://easywebtools.in/video-downloader">X/Twitter Downloader</a>
-            </div>
-        </div>
-        <div class="footer-bottom">
-            <p>&copy; 2026 Easy Web Tools. All rights reserved. Easywebtools.in - a Part of Cardekhen Pvt Ltd</p>
-            <div class="footer-links">
-                <a href="https://easywebtools.in/about">About Us</a>
-                <a href="https://easywebtools.in/contact">Contact</a>
-                <a href="https://easywebtools.in/privacy-policy">Privacy Policy</a>
-                <a href="https://easywebtools.in/terms-and-conditions">Terms of Service</a>
-            </div>
-        </div>
-    </div>
+<footer class="seo-footer">
+<p>© 2026 <a href="https://easywebtools.in">EasyWebTools.in</a> — Free Online Image Compressor for Free. All rights reserved.  <br> Easywebtools.com - a Part of Cardekhen Pvt Ltd </p>
 </footer>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
