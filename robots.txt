@@ -1,5 +1,3 @@
-# robots.txt for https://easywebtools.in/
-
 User-agent: *
 Disallow: /wp-admin/
 Disallow: /wp-login.php
